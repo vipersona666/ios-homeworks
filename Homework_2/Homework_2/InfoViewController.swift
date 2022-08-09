@@ -20,12 +20,11 @@ class InfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "green")!)
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "green") ?? UIImage())
         self.view.addSubview(buttonInfo)
         self.buttonInfo.center = self.view.center
-
-        
     }
+    
     @objc private func didTapButton() {
         let alert = UIAlertController(title: "Пост будет удален безвозвратно", message: "Подтвердите", preferredStyle: .actionSheet)
         let trashButton = UIAlertAction(title: "Удалить", style: .destructive) {_ in
@@ -38,17 +37,4 @@ class InfoViewController: UIViewController {
         alert.addAction(cancelButton)
         self.present(alert, animated: true)
     }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
