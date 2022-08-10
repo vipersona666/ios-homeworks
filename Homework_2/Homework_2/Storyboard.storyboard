@@ -26,13 +26,28 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hipster Cat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQz-mb-tv5">
-                                        <rect key="frame" x="158" y="27" width="98" height="21.5"/>
+                                        <rect key="frame" x="158" y="27" width="98" height="25.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting for something..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPZ-xP-R0L">
+                                        <rect key="frame" x="158" y="83" width="154" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" systemColor="systemGrayColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w8S-3B-Ul3">
+                                        <rect key="frame" x="158" y="111" width="170" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="9Q1-g8-t2K"/>
+                                            <constraint firstAttribute="width" constant="170" id="BdO-IQ-AtZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHE-fA-6A6">
-                                        <rect key="frame" x="16" y="135.5" width="382" height="50"/>
+                                        <rect key="frame" x="16" y="159" width="382" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="xw5-Ei-uhW"/>
                                         </constraints>
@@ -44,26 +59,24 @@
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting for something..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPZ-xP-R0L">
-                                        <rect key="frame" x="158" y="84.5" width="154" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" systemColor="systemGrayColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray2Color"/>
                                 <constraints>
+                                    <constraint firstItem="UPZ-xP-R0L" firstAttribute="top" secondItem="wQz-mb-tv5" secondAttribute="bottom" constant="30.5" id="0Tf-4b-1ng"/>
                                     <constraint firstItem="qrr-8g-3bN" firstAttribute="leading" secondItem="CyT-D8-Bd0" secondAttribute="leading" constant="16" id="42i-6G-Kjj"/>
                                     <constraint firstItem="XHE-fA-6A6" firstAttribute="leading" secondItem="CyT-D8-Bd0" secondAttribute="leading" constant="16" id="4MX-an-Cvq"/>
+                                    <constraint firstItem="w8S-3B-Ul3" firstAttribute="top" secondItem="UPZ-xP-R0L" secondAttribute="bottom" constant="8" id="Did-Fz-Kvs"/>
                                     <constraint firstItem="wQz-mb-tv5" firstAttribute="top" secondItem="CyT-D8-Bd0" secondAttribute="top" constant="27" id="EQK-qm-1mf"/>
+                                    <constraint firstItem="w8S-3B-Ul3" firstAttribute="height" secondItem="UPZ-xP-R0L" secondAttribute="height" multiplier="2" id="ETt-Oo-BNC"/>
                                     <constraint firstItem="qrr-8g-3bN" firstAttribute="top" secondItem="CyT-D8-Bd0" secondAttribute="top" constant="16" id="Xkp-AH-Ojs"/>
                                     <constraint firstItem="XHE-fA-6A6" firstAttribute="centerX" secondItem="CyT-D8-Bd0" secondAttribute="centerX" id="d35-En-1Ed"/>
+                                    <constraint firstItem="w8S-3B-Ul3" firstAttribute="leading" secondItem="qrr-8g-3bN" secondAttribute="trailing" constant="38.5" id="fv2-jf-nV7"/>
+                                    <constraint firstItem="UPZ-xP-R0L" firstAttribute="height" secondItem="wQz-mb-tv5" secondAttribute="height" multiplier="0.790698" id="gFC-i7-6sH"/>
                                     <constraint firstItem="qrr-8g-3bN" firstAttribute="width" secondItem="CyT-D8-Bd0" secondAttribute="width" multiplier="1:4" id="h2q-Jf-tc6"/>
                                     <constraint firstItem="wQz-mb-tv5" firstAttribute="leading" secondItem="qrr-8g-3bN" secondAttribute="trailing" constant="38.5" id="n4x-wt-IQK"/>
                                     <constraint firstAttribute="trailing" secondItem="XHE-fA-6A6" secondAttribute="trailing" constant="16" id="pSb-jP-iRd"/>
-                                    <constraint firstItem="XHE-fA-6A6" firstAttribute="top" secondItem="UPZ-xP-R0L" secondAttribute="bottom" constant="34" id="sTb-kI-WZi"/>
+                                    <constraint firstItem="XHE-fA-6A6" firstAttribute="top" secondItem="w8S-3B-Ul3" secondAttribute="bottom" constant="8" id="s01-5j-x4s"/>
                                     <constraint firstItem="UPZ-xP-R0L" firstAttribute="leading" secondItem="qrr-8g-3bN" secondAttribute="trailing" constant="38.5" id="xek-vV-ABu"/>
-                                    <constraint firstItem="XHE-fA-6A6" firstAttribute="top" secondItem="qrr-8g-3bN" secondAttribute="bottom" constant="16" id="y1x-kq-rZX"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -79,7 +92,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="18.75" y="90"/>
+            <point key="canvasLocation" x="17.39130434782609" y="89.732142857142847"/>
         </scene>
     </scenes>
     <resources>
