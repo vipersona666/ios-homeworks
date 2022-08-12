@@ -23,14 +23,12 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "trava1.jpeg")!)
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "trava1.jpeg") ?? UIImage())
         self.navigationItem.title = "Лента"
         self.navigationController?.navigationBar.barStyle = UIBarStyle.black
-        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.view.addSubview(button)
         self.button.center = self.view.center
-        
-        
     }
     @objc private func didTapButton() {
         let vc = PostViewController()
@@ -38,16 +36,4 @@ class FeedViewController: UIViewController {
         vc.titlePost = post.title
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

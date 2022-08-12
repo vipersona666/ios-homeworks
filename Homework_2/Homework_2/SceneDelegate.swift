@@ -19,8 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navController = UINavigationController(rootViewController: FeedViewController())
         let profileController = UINavigationController(rootViewController: ProfileViewController())
         let tabBarController = UITabBarController()
+        tabBarController.tabBar.backgroundColor = .white
         tabBarController.tabBar.barStyle = UIBarStyle.black
-        tabBarController.tabBar.tintColor = UIColor.white
+        tabBarController.tabBar.tintColor = UIColor.black
         tabBarController.viewControllers = [navController, profileController]
         tabBarController.viewControllers?.enumerated().forEach{
             $1.tabBarItem.title = $0 == 0 ? "Главная" : "Профиль"
