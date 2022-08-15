@@ -38,7 +38,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w8S-3B-Ul3">
-                                        <rect key="frame" x="158" y="111" width="170" height="40"/>
+                                        <rect key="frame" x="157.5" y="111" width="170" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="9Q1-g8-t2K"/>
                                             <constraint firstAttribute="width" constant="170" id="BdO-IQ-AtZ"/>
@@ -70,7 +70,7 @@
                                     <constraint firstItem="w8S-3B-Ul3" firstAttribute="height" secondItem="UPZ-xP-R0L" secondAttribute="height" multiplier="2" id="ETt-Oo-BNC"/>
                                     <constraint firstItem="qrr-8g-3bN" firstAttribute="top" secondItem="CyT-D8-Bd0" secondAttribute="top" constant="16" id="Xkp-AH-Ojs"/>
                                     <constraint firstItem="XHE-fA-6A6" firstAttribute="centerX" secondItem="CyT-D8-Bd0" secondAttribute="centerX" id="d35-En-1Ed"/>
-                                    <constraint firstItem="w8S-3B-Ul3" firstAttribute="leading" secondItem="qrr-8g-3bN" secondAttribute="trailing" constant="38.5" id="fv2-jf-nV7"/>
+                                    <constraint firstItem="w8S-3B-Ul3" firstAttribute="leading" secondItem="qrr-8g-3bN" secondAttribute="trailing" constant="38" id="fv2-jf-nV7"/>
                                     <constraint firstItem="UPZ-xP-R0L" firstAttribute="height" secondItem="wQz-mb-tv5" secondAttribute="height" multiplier="0.790698" id="gFC-i7-6sH"/>
                                     <constraint firstItem="qrr-8g-3bN" firstAttribute="width" secondItem="CyT-D8-Bd0" secondAttribute="width" multiplier="1:4" id="h2q-Jf-tc6"/>
                                     <constraint firstItem="wQz-mb-tv5" firstAttribute="leading" secondItem="qrr-8g-3bN" secondAttribute="trailing" constant="38.5" id="n4x-wt-IQK"/>
