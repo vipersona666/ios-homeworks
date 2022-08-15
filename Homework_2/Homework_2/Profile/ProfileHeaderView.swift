@@ -90,55 +90,33 @@ class ProfileHeaderView: UIView{
         self.addSubview(infoLable)
         self.addSubview(textField)
         
-        let avatarImageConstraints = self.avatarImageConstraints()
-        let buttonConstraints = self.buttonConstraints()
-        let nameLableConstraints = self.nameLableConstraints()
-        let infoLableConstraints = self.infoLableConstraints()
-        let textFieldConstraints = self.textFieldConstraints()
-        NSLayoutConstraint.activate(avatarImageConstraints + buttonConstraints + nameLableConstraints + infoLableConstraints + textFieldConstraints)
-    
+        NSLayoutConstraint.activate([
+            self.avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            self.avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            self.avatarImageView.widthAnchor.constraint(equalToConstant: 120),
+            self.avatarImageView.heightAnchor.constraint(equalTo: self.avatarImageView.widthAnchor, multiplier: 1),
+            
+            self.nameLable.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
+            self.nameLable.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 28),
+            self.nameLable.heightAnchor.constraint(equalToConstant: 30),
+            
+            self.infoLable.topAnchor.constraint(equalTo: self.nameLable.bottomAnchor, constant: 27),
+            self.infoLable.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 28),
+            self.infoLable.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4),
+            self.infoLable.heightAnchor.constraint(equalToConstant: 20),
+            
+            self.textField.topAnchor.constraint(equalTo: self.infoLable.bottomAnchor, constant: 8),
+            self.textField.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 28),
+            self.textField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4),
+            self.textField.heightAnchor.constraint(equalToConstant: 40),
+            
+            self.editButton.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 8),
+            self.editButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            self.editButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            self.editButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
-    
-    private func avatarImageConstraints() -> [NSLayoutConstraint]{
-        let topConstraint = self.avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
-        let leftConstraint = self.avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
-        let width = self.avatarImageView.widthAnchor.constraint(equalToConstant: 120)
-        let heigth = self.avatarImageView.heightAnchor.constraint(equalTo: self.avatarImageView.widthAnchor, multiplier: 1)
-        return [topConstraint, leftConstraint, width, heigth]
-    }
-    
-    private func nameLableConstraints() -> [NSLayoutConstraint]{
-        let topConstraint = self.nameLable.topAnchor.constraint(equalTo: self.topAnchor, constant: 27)
-        let leftConstraint = self.nameLable.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 27.5)
-        let heigth = self.nameLable.heightAnchor.constraint(equalToConstant: 30)
-        return [topConstraint, leftConstraint, heigth]
-    }
-    
-    private func infoLableConstraints() -> [NSLayoutConstraint]{
-        let topConstraint = self.infoLable.topAnchor.constraint(equalTo: self.nameLable.bottomAnchor, constant: 27)
-        let leftConstraint = self.infoLable.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 27.5)
-        let width = self.infoLable.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4)
-        let heigth = self.infoLable.heightAnchor.constraint(equalToConstant: 20)
-        return [topConstraint, leftConstraint, heigth, width]
-    }
-    
-    private func textFieldConstraints() -> [NSLayoutConstraint]{
-        let topConstraint = self.textField.topAnchor.constraint(equalTo: self.infoLable.bottomAnchor, constant: 8)
-        let leftConstraint = self.textField.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 27.5)
-        let width = self.textField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4)
-        let heigth = self.textField.heightAnchor.constraint(equalToConstant: 40)
-        return [topConstraint, leftConstraint,  heigth, width]
-    }
-    
-    private func buttonConstraints() -> [NSLayoutConstraint]{
-        let topConstraint = self.editButton.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 8)
-        let leftConstraint = self.editButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
-        let rightConstraint = self.editButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
-        let heigth = self.editButton.heightAnchor.constraint(equalToConstant: 50)
-        return [topConstraint, leftConstraint, rightConstraint, heigth]
-    }
-    
-    
+
     @objc private func buttonPressed(){
         infoLable.text = statusText
         print(statusText)
@@ -147,8 +125,7 @@ class ProfileHeaderView: UIView{
     }
     
     @objc private func statusTextChanged(_ textField: UITextField){
-        statusText = textField.text!
-        
+        statusText = textField.text ?? ""
     }
     
 }
