@@ -76,6 +76,7 @@ class ProfileHeaderView: UIView{
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()
+        self.setupGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -126,6 +127,17 @@ class ProfileHeaderView: UIView{
     
     @objc private func statusTextChanged(_ textField: UITextField){
         statusText = textField.text ?? ""
+    }
+    
+    private func setupGesture(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+
+    @objc private func hideKeyboard(){
+        self.endEditing(true)
+        
     }
     
 }

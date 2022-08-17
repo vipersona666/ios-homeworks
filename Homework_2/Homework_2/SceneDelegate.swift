@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = UIWindow(windowScene: windowScene)
         let navController = UINavigationController(rootViewController: FeedViewController())
-        let profileController = UINavigationController(rootViewController: ProfileViewController())
+        let profileController = UINavigationController(rootViewController: LogInViewController())
         let tabBarController = UITabBarController()
         tabBarController.tabBar.backgroundColor = .white
         tabBarController.tabBar.barStyle = UIBarStyle.black

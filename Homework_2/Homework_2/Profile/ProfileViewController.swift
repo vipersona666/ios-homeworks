@@ -60,8 +60,6 @@ class ProfileViewController: UIViewController {
         return [bottomConstraint, leftConstraint, rightConstraint, heigth]
     }
     
-    
-    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }
