@@ -9,7 +9,6 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
-
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +78,7 @@ class LogInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Профиль"
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.logInImageView)
         self.scrollView.addSubview(self.stackView)

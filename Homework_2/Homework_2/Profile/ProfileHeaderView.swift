@@ -9,8 +9,6 @@ import UIKit
 
 class ProfileHeaderView: UIView{
     
-    
-    
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         let imageName = "cat2"
