@@ -9,61 +9,95 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private lazy var profileHeaderView: ProfileHeaderView = {
-        let profileView = ProfileHeaderView(frame: .zero)
-        profileView.translatesAutoresizingMaskIntoConstraints = false
-        return profileView
-    }()
+    private var authorArray = ["Острые козырьки", "Рик и Морти", "Воспитанные волками", "Во все тяжкие                  (сериал 2008 – 2013) "]
+    private var imageArray = ["Peaky", "rick", "volf", "Breaking"]
+    private var descriptionArray = ["Британский сериал о криминальном мире Бирмингема 20-х годов прошлого века, в котором многолюдная семья Шелби стала одной из самых жестоких и влиятельных гангстерских банд послевоенного времени. Фирменным знаком группировки, промышлявшей грабежами и азартными играми, стали зашитые в козырьки лезвия.","В центре сюжета - школьник по имени Морти и его дедушка Рик. Морти - самый обычный мальчик, который ничем не отличается от своих сверстников. А вот его дедуля занимается необычными научными исследованиями и зачастую полностью неадекватен. Он может в любое время дня и ночи схватить внука и отправиться вместе с ним в безумные приключения с помощью построенной из разного хлама летающей тарелки, которая способна перемещаться сквозь межпространственный тоннель. Каждый раз эта парочка оказывается в самых неожиданных местах и самых нелепых ситуациях.","2145 год. Человечество захлебнулось в кровопролитной войне между верующими и атеистами. Некоторое время спустя на планете Kepler-22b в меру удачно приземляется небольшое судно с двумя андроидами, которые называют друг друга Матерью и Отцом. Их миссия — вырастить из привезённых эмбрионов человеческих детёнышей и воспитать их атеистами.","Школьный учитель химии Уолтер Уайт узнаёт, что болен раком лёгких. Учитывая сложное финансовое состояние дел семьи, а также перспективы, Уолтер решает заняться изготовлением метамфетамина. Для этого он привлекает своего бывшего ученика Джесси Пинкмана, когда-то исключённого из школы при активном содействии Уайта. Пинкман сам занимался варкой мета, но накануне, в ходе рейда УБН, он лишился подельника и лаборатории."]
     
-    private lazy var pressButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.backgroundColor = .blue
-        button.tintColor = .white
-        button.setTitle("Press", for: .normal)
-        button.layer.cornerRadius = 12
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowOffset = CGSize(width: 6, height: 6)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private var likes = Int.random(in: 500..<900)
+    private var views = Int.random(in: 0..<900)
+    
+    private lazy var tableView: UITableView = {
+        
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(ProfileTableHederView.self, forHeaderFooterViewReuseIdentifier: "HeaderView")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Default")
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "CustomCell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Профиль"
-        self.view.backgroundColor = .white
-        self.view.addSubview(profileHeaderView)
-        self.view.addSubview(pressButton)
         self.setupConstraints()
+        self.setupGesture()
+    }
+    private func setupGesture(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func hideKeyboard(){
+        self.view.endEditing(true)
     }
     
     private func setupConstraints(){
-        let profileViewConstraint = self.profileViewConstraint()
-        let buttonConstraints = self.buttonConstraints()
-        NSLayoutConstraint.activate(profileViewConstraint + buttonConstraints)
+        self.view.addSubview(self.tableView)
+        self.view.backgroundColor = .white
+        self.tableView.backgroundColor = .white
         
+        NSLayoutConstraint.activate([
+            self.tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            self.tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            self.tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            self.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
-    
-    private func profileViewConstraint() -> [NSLayoutConstraint]{
-        let topConstraint = self.profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
-        let leftConstraint = self.profileHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-        let rightConstraint = self.profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        let heigth = self.profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
-        return [topConstraint, leftConstraint, rightConstraint, heigth]
-    }
-    
-    private func buttonConstraints() -> [NSLayoutConstraint]{
-        let bottomConstraint = self.pressButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -90)
-        let leftConstraint = self.pressButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
-        let rightConstraint = self.pressButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        let heigth = self.pressButton.heightAnchor.constraint(equalToConstant: 50)
-        return [bottomConstraint, leftConstraint, rightConstraint, heigth]
-    }
-    
-    
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
+}
 
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? ProfileTableHederView else{
+                return nil
+            }
+            return headerView
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 220
+        } else {
+            return 0
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        4
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as? PostTableViewCell else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Default", for: indexPath)
+            return cell
+        }
+        let viewModel = PostTableViewCell.ViewModel(author: authorArray[indexPath.section],
+                                                    image: UIImage(named: imageArray[indexPath.section]),
+                                                    description: descriptionArray[indexPath.section],
+                                                    likes: likes * (indexPath.section + 2),
+                                                    views: views * (indexPath.section + 2))
+        cell.setup(with: viewModel)
+        return cell
+    }
+    
 }
