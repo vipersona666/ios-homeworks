@@ -33,7 +33,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     func setup(with viewmodel: ViewModel){
         self.photoImageView.image = viewmodel.image
     }
-    
+
     private func setupView(){
         self.addSubview(self.photoImageView)
         

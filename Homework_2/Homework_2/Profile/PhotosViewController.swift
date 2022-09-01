@@ -29,6 +29,7 @@ class PhotosViewController: UIViewController{
     
     private let dataSource: [String] = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40"]
      
+    var data = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Photo Gallery"
@@ -84,5 +85,12 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
         let width = collectionView.bounds.width - numberOfItemsOfLine * interItemSpacing - inSets.left - inSets.right
         let itemWidth = floor (width / numberOfItemsOfLine)
         return CGSize(width: itemWidth, height: itemWidth)
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = ShowViewController()
+        let viewModel = ShowViewController.ViewModel(image: UIImage(named: dataSource[indexPath.row]))
+        vc.setup(with: viewModel)
+        vc.modalPresentationStyle = .automatic
+        self.present(vc, animated: true)
     }
 }
