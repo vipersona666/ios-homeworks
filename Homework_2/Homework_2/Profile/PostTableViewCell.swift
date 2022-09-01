@@ -17,7 +17,7 @@ class PostTableViewCell: UITableViewCell {
         let views: Int
     }
     
-    private lazy var authorLable: UILabel = {
+    private lazy var authorLabel: UILabel = {
         let name = UILabel()
         name.textColor = .black
         name.font = UIFont.boldSystemFont(ofSize: 20.0)
@@ -34,7 +34,7 @@ class PostTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private lazy var descriptionLable: UILabel = {
+    private lazy var descriptionLabel: UILabel = {
         let description = UILabel()
         description.textColor = .systemGray
         description.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -43,20 +43,20 @@ class PostTableViewCell: UITableViewCell {
         return description
     }()
     
-    private lazy var likesLable: UILabel = {
-        let likesLable = UILabel()
-        likesLable.textColor = .black
-        likesLable.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        likesLable.translatesAutoresizingMaskIntoConstraints = false
-        return likesLable
+    private lazy var likesLabel: UILabel = {
+        let likesLabel = UILabel()
+        likesLabel.textColor = .black
+        likesLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        likesLabel.translatesAutoresizingMaskIntoConstraints = false
+        return likesLabel
     }()
     
-    private lazy var viewsLable: UILabel = {
-        let viewsLable = UILabel()
-        viewsLable.textColor = .black
-        viewsLable.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        viewsLable.translatesAutoresizingMaskIntoConstraints = false
-        return viewsLable
+    private lazy var viewsLabel: UILabel = {
+        let viewsLabel = UILabel()
+        viewsLabel.textColor = .black
+        viewsLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        viewsLabel.translatesAutoresizingMaskIntoConstraints = false
+        return viewsLabel
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -69,46 +69,42 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func setup(with viewmodel: ViewModel){
-        self.authorLable.text = viewmodel.author
+        self.authorLabel.text = viewmodel.author
         self.postImageView.image = viewmodel.image
-        self.descriptionLable.text = viewmodel.description
-        self.likesLable.text = "Likes: \(viewmodel.likes)"
-        self.viewsLable.text = "Views: \(viewmodel.views)"
+        self.descriptionLabel.text = viewmodel.description
+        self.likesLabel.text = "Likes: \(viewmodel.likes)"
+        self.viewsLabel.text = "Views: \(viewmodel.views)"
     }
     
     private func setupView(){
-        self.addSubview(self.authorLable)
+        self.addSubview(self.authorLabel)
         self.addSubview(self.postImageView)
-        self.addSubview(self.descriptionLable)
-        self.addSubview(self.likesLable)
-        self.addSubview(self.viewsLable)
+        self.addSubview(self.descriptionLabel)
+        self.addSubview(self.likesLabel)
+        self.addSubview(self.viewsLabel)
         
         NSLayoutConstraint.activate([
-            self.authorLable.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            self.authorLable.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
-            self.authorLable.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            self.authorLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            self.authorLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
+            self.authorLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             
-            self.postImageView.topAnchor.constraint(equalTo: self.authorLable.bottomAnchor, constant: 12),
+            self.postImageView.topAnchor.constraint(equalTo: self.authorLabel.bottomAnchor, constant: 12),
             self.postImageView.leftAnchor.constraint(equalTo: self.leftAnchor),
             self.postImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.postImageView.heightAnchor.constraint(equalTo: self.widthAnchor),
      
-            self.descriptionLable.topAnchor.constraint(equalTo: self.postImageView.bottomAnchor, constant: 16),
-            self.descriptionLable.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
-            self.descriptionLable.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            self.descriptionLabel.topAnchor.constraint(equalTo: self.postImageView.bottomAnchor, constant: 16),
+            self.descriptionLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
+            self.descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             
-            self.likesLable.topAnchor.constraint(equalTo: self.descriptionLable.bottomAnchor, constant: 16),
-            self.likesLable.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
-            self.likesLable.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
+            self.likesLabel.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor, constant: 16),
+            self.likesLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
+            self.likesLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
         
-            self.viewsLable.topAnchor.constraint(equalTo: self.descriptionLable.bottomAnchor, constant: 16),
-            self.viewsLable.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            self.viewsLable.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
+            self.viewsLabel.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor, constant: 16),
+            self.viewsLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            self.viewsLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
         ])
     }
     
-    
-
-   
-
 }

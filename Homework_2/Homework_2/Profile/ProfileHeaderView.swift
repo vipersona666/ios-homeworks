@@ -35,7 +35,7 @@ class ProfileHeaderView: UIView{
         return button
     }()
     
-    private lazy var nameLable: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let name = UILabel(frame: .zero)
         name.text = "Coder Cat"
         name.textColor = .black
@@ -44,7 +44,7 @@ class ProfileHeaderView: UIView{
         return name
     }()
     
-    private lazy var infoLable: UILabel = {
+    private lazy var infoLabel: UILabel = {
         let info = UILabel(frame: .zero)
         info.text = "Waiting for something..."
         info.textColor = .darkGray
@@ -85,8 +85,8 @@ class ProfileHeaderView: UIView{
         self.backgroundColor = .lightGray
         self.addSubview(avatarImageView)
         self.addSubview(editButton)
-        self.addSubview(nameLable)
-        self.addSubview(infoLable)
+        self.addSubview(nameLabel)
+        self.addSubview(infoLabel)
         self.addSubview(textField)
         
         NSLayoutConstraint.activate([
@@ -95,16 +95,16 @@ class ProfileHeaderView: UIView{
             self.avatarImageView.widthAnchor.constraint(equalToConstant: 120),
             self.avatarImageView.heightAnchor.constraint(equalTo: self.avatarImageView.widthAnchor, multiplier: 1),
             
-            self.nameLable.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
-            self.nameLable.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 28),
-            self.nameLable.heightAnchor.constraint(equalToConstant: 30),
+            self.nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
+            self.nameLabel.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 28),
+            self.nameLabel.heightAnchor.constraint(equalToConstant: 30),
             
-            self.infoLable.topAnchor.constraint(equalTo: self.nameLable.bottomAnchor, constant: 27),
-            self.infoLable.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 28),
-            self.infoLable.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4),
-            self.infoLable.heightAnchor.constraint(equalToConstant: 20),
+            self.infoLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 27),
+            self.infoLabel.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 28),
+            self.infoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4),
+            self.infoLabel.heightAnchor.constraint(equalToConstant: 20),
             
-            self.textField.topAnchor.constraint(equalTo: self.infoLable.bottomAnchor, constant: 8),
+            self.textField.topAnchor.constraint(equalTo: self.infoLabel.bottomAnchor, constant: 8),
             self.textField.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 28),
             self.textField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4),
             self.textField.heightAnchor.constraint(equalToConstant: 40),
@@ -117,7 +117,7 @@ class ProfileHeaderView: UIView{
     }
 
     @objc private func buttonPressed(){
-        infoLable.text = statusText
+        infoLabel.text = statusText
         print(statusText)
         textField.text = ""
         textField.resignFirstResponder()
@@ -132,7 +132,6 @@ class ProfileHeaderView: UIView{
         self.addGestureRecognizer(tapGesture)
     }
     
-
     @objc private func hideKeyboard(){
         self.endEditing(true)
         
