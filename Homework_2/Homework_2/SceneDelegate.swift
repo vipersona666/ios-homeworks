@@ -19,8 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navController = UINavigationController(rootViewController: FeedViewController())
         let profileController = UINavigationController(rootViewController: LogInViewController())
         let tabBarController = UITabBarController()
-        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.tabBar.backgroundColor = .clear
         tabBarController.tabBar.barStyle = UIBarStyle.black
+        
         tabBarController.tabBar.tintColor = UIColor.black
         tabBarController.viewControllers = [navController, profileController]
         tabBarController.viewControllers?.enumerated().forEach{
