@@ -7,10 +7,10 @@
 
 import UIKit
 
-class PostViewController: UIViewController {
+public class PostViewController: UIViewController {
     var titlePost: String = ""
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = titlePost
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "blue") ?? UIImage())

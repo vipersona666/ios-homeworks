@@ -8,8 +8,9 @@
 import UIKit
 
 struct Post{
-    var title: String
+    var title: String = ""
 }
+
 
 class FeedViewController: UIViewController {
     private lazy var button:UIButton = {
@@ -25,8 +26,6 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "trava1.jpeg") ?? UIImage())
         self.navigationItem.title = "Лента"
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
-        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.view.addSubview(button)
         self.button.center = self.view.center
     }
