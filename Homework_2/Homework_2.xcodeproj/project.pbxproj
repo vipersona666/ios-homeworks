@@ -24,21 +24,8 @@
 		B3B7372628CF7E5E00BBCA25 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = B3B7372528CF7E5E00BBCA25 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3B7372928CF7E5F00BBCA25 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B7372328CF7E5E00BBCA25 /* StorageService.framework */; };
 		B3B7372A28CF7E5F00BBCA25 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B3B7372328CF7E5E00BBCA25 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B3B7372F28CF82D500BBCA25 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3451FD4289A83520092DB6E /* PostViewController.swift */; };
-		B3B7373328CF835800BBCA25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3451FBA289A821C0092DB6E /* AppDelegate.swift */; };
-		B3B7373628CF835800BBCA25 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3451FCE289A83080092DB6E /* FeedViewController.swift */; };
-		B3B7373728CF835800BBCA25 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3451FD0289A83210092DB6E /* InfoViewController.swift */; };
-		B3B7373828CF835800BBCA25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3451FBC289A821C0092DB6E /* SceneDelegate.swift */; };
 		B3B7374228CF8CAA00BBCA25 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3451FD4289A83520092DB6E /* PostViewController.swift */; };
-		B3B7374C28CF8D4000BBCA25 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7371C28C0F64C00BBCA25 /* ShowViewController.swift */; };
-		B3B7374D28CF8D4000BBCA25 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C8DB28B4CD4B008B5D74 /* PostTableViewCell.swift */; };
-		B3B7374E28CF8D4000BBCA25 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C48AAF289D2EB2001934EB /* ProfileViewController.swift */; };
-		B3B7374F28CF8D4000BBCA25 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C48AB128A138B3001934EB /* ProfileHeaderView.swift */; };
-		B3B7375028CF8D4000BBCA25 /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C8D928AE8E33008B5D74 /* ProfileTableHederView.swift */; };
-		B3B7375128CF8D4000BBCA25 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7371628BD156F00BBCA25 /* PhotosTableViewCell.swift */; };
-		B3B7375228CF8D4000BBCA25 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7371828BFAB3400BBCA25 /* PhotosViewController.swift */; };
-		B3B7375428CF8D4000BBCA25 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C8D528AA9AC3008B5D74 /* LogInViewController.swift */; };
-		B3B7375528CF8D6100BBCA25 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7371A28C0CEA400BBCA25 /* PhotosCollectionViewCell.swift */; };
+		B3B7375828D0B7B900BBCA25 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7375628D0B71900BBCA25 /* Post.swift */; };
 		B3C48AB0289D2EB2001934EB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C48AAF289D2EB2001934EB /* ProfileViewController.swift */; };
 		B3C48AB228A138B3001934EB /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C48AB128A138B3001934EB /* ProfileHeaderView.swift */; };
 /* End PBXBuildFile section */
@@ -87,6 +74,7 @@
 		B3B7371C28C0F64C00BBCA25 /* ShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
 		B3B7372328CF7E5E00BBCA25 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B7372528CF7E5E00BBCA25 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
+		B3B7375628D0B71900BBCA25 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		B3C48AAF289D2EB2001934EB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B3C48AB128A138B3001934EB /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; tabWidth = 4; };
 /* End PBXFileReference section */
@@ -137,6 +125,7 @@
 				B3451FCE289A83080092DB6E /* FeedViewController.swift */,
 				B3451FD0289A83210092DB6E /* InfoViewController.swift */,
 				B3451FBE289A821C0092DB6E /* ViewController.swift */,
+				B3451FD4289A83520092DB6E /* PostViewController.swift */,
 				B3451FC3289A821E0092DB6E /* Assets.xcassets */,
 				B3451FC5289A821E0092DB6E /* LaunchScreen.storyboard */,
 				B3451FC8289A821E0092DB6E /* Info.plist */,
@@ -148,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				B3B7372528CF7E5E00BBCA25 /* StorageService.h */,
-				B3451FD4289A83520092DB6E /* PostViewController.swift */,
+				B3B7375628D0B71900BBCA25 /* Post.swift */,
 			);
 			path = StorageService;
 			sourceTree = "<group>";
@@ -303,20 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3B7375028CF8D4000BBCA25 /* ProfileTableHederView.swift in Sources */,
-				B3B7375528CF8D6100BBCA25 /* PhotosCollectionViewCell.swift in Sources */,
-				B3B7374D28CF8D4000BBCA25 /* PostTableViewCell.swift in Sources */,
-				B3B7373328CF835800BBCA25 /* AppDelegate.swift in Sources */,
-				B3B7375128CF8D4000BBCA25 /* PhotosTableViewCell.swift in Sources */,
-				B3B7373828CF835800BBCA25 /* SceneDelegate.swift in Sources */,
-				B3B7372F28CF82D500BBCA25 /* PostViewController.swift in Sources */,
-				B3B7374F28CF8D4000BBCA25 /* ProfileHeaderView.swift in Sources */,
-				B3B7373728CF835800BBCA25 /* InfoViewController.swift in Sources */,
-				B3B7373628CF835800BBCA25 /* FeedViewController.swift in Sources */,
-				B3B7375428CF8D4000BBCA25 /* LogInViewController.swift in Sources */,
-				B3B7375228CF8D4000BBCA25 /* PhotosViewController.swift in Sources */,
-				B3B7374E28CF8D4000BBCA25 /* ProfileViewController.swift in Sources */,
-				B3B7374C28CF8D4000BBCA25 /* ShowViewController.swift in Sources */,
+				B3B7375828D0B7B900BBCA25 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
