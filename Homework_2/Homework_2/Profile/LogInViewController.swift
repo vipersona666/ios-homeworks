@@ -32,6 +32,7 @@ class LogInViewController: UIViewController {
         logIn.autocapitalizationType = .none
         logIn.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: logIn.frame.height))
         logIn.leftViewMode = .always
+        logIn.clipsToBounds = true
         logIn.translatesAutoresizingMaskIntoConstraints = false
         return logIn
     }()
@@ -103,7 +104,7 @@ class LogInViewController: UIViewController {
     
     private func setupView(){
         NSLayoutConstraint.activate([
-            self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
@@ -122,7 +123,9 @@ class LogInViewController: UIViewController {
             self.logInButton.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16),
             self.logInButton.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor),
             self.logInButton.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor),
-            self.logInButton.heightAnchor.constraint(equalToConstant: 50)
+            //self.logInButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.logInButton.heightAnchor.constraint(equalToConstant: 50),
+            self.logInButton.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: 16),
         ])
     }
     

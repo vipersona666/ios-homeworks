@@ -16,22 +16,6 @@ class ProfileViewController: UIViewController {
     private var likes = Int.random(in: 500..<900)
     private var views = Int.random(in: 0..<900)
     
-//    private lazy var layout: UICollectionViewFlowLayout = {
-//        let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .horizontal
-//        layout.minimumLineSpacing = 12
-//        layout.minimumInteritemSpacing = 8
-//        return layout
-//    }()
-//
-//    private lazy var collectionView: UICollectionView = {
-//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DefaultCell")
-//        collectionView.dataSource = self
-//        collectionView.delegate = self
-//        return collectionView
-//    }()
-    
     private lazy var tableView: UITableView = {
         
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -54,8 +38,11 @@ class ProfileViewController: UIViewController {
  
     private func setupConstraints(){
         self.view.addSubview(self.tableView)
-        //self.view.addSubview(self.collectionView)
+    #if DEBUG
+        self.view.backgroundColor = .yellow
+        #else
         self.view.backgroundColor = .white
+        #endif
         self.tableView.backgroundColor = .white
         
         NSLayoutConstraint.activate([
@@ -63,12 +50,7 @@ class ProfileViewController: UIViewController {
             self.tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             self.tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             self.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            
-//            self.collectionView.topAnchor.constraint(equalTo: tableView.topAnchor),
-//            self.collectionView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
-//            self.collectionView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
-//            self.collectionView.heightAnchor.constraint(equalTo: tableView.heightAnchor, constant: 100),
-//            self.collectionView.bottomAnchor.constraint(equalTo: tableView.bottomAnchor)
+           
         ])
     }
 }
@@ -134,18 +116,3 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
         
 }
 
-//extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource{
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        4
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCell", for: indexPath)
-//        cell.clipsToBounds = true
-//        cell.layer.cornerRadius = 6
-//        cell.backgroundColor = .red
-//        return cell
-//    }
-//
-//
-//}
