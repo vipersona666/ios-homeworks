@@ -68,8 +68,9 @@ class LogInViewController: UIViewController {
         let button = UIButton(frame: .zero)
         let image = UIImage(named: "blue_pixel")
         button.setBackgroundImage(image, for: .normal)
-        button.titleLabel?.textColor = .white
+        //button.titleLabel?.textColor = .white
         button.setTitle("Log In", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
@@ -144,7 +145,7 @@ class LogInViewController: UIViewController {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRect = keyboardFrame.cgRectValue
             let keyboardHight = keyboardRect.height
-            let loginButtonBottomPointY = self.logInButton.frame.origin.y + 50
+            let loginButtonBottomPointY = self.logInButton.frame.origin.y + 80
             let keyboardOriginY = self.view.frame.height - keyboardHight
             let offset = keyboardOriginY <= loginButtonBottomPointY ? loginButtonBottomPointY - keyboardOriginY + 16 : 0
             

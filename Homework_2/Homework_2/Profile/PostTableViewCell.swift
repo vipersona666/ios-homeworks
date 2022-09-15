@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
+    
+    let imageFilter = ImageProcessor()
+    
     
     struct ViewModel{
         let author: String
@@ -68,9 +72,12 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     func setup(with viewmodel: ViewModel){
         self.authorLabel.text = viewmodel.author
-        self.postImageView.image = viewmodel.image
+            //self.postImageView.image = viewmodel.image
+        imageFilter.processImage(sourceImage: viewmodel.image!, filter: .posterize) { self.postImageView.image = $0
+        }
         self.descriptionLabel.text = viewmodel.description
         self.likesLabel.text = "Likes: \(viewmodel.likes)"
         self.viewsLabel.text = "Views: \(viewmodel.views)"

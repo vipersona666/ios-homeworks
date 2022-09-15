@@ -15,8 +15,7 @@ class PostViewController: UIViewController {
         self.navigationItem.title = titlePost
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "blue") ?? UIImage())
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self , action: #selector(didTabItem))
-        navigationItem.rightBarButtonItem = barButtonItem
-    }
+        navigationItem.rightBarButtonItem = barButtonItem    }
     
     @objc private func didTabItem(){
         let infoVC = InfoViewController()

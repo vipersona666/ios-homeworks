@@ -4,29 +4,29 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Homework_2.xcscheme_^#shared#^_</key>
+		<key>Pods-Homework_2.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
-		<key>Release.xcscheme_^#shared#^_</key>
+		<key>Pods-StorageService.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
-		<key>StorageService.xcscheme_^#shared#^_</key>
+		<key>SnapKit.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>B3451FB6289A821C0092DB6E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>
