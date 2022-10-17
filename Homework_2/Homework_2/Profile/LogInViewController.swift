@@ -131,8 +131,38 @@ class LogInViewController: UIViewController {
     
     
     @objc private func buttonPressed(){
-        let vc = ProfileViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        if (logInTextField.text != "" && passTextField.text != "") {
+            
+            let user = User(userName: "Бездомный кот", password: passTextField.text!, avatar: UIImage(named: "cat3")!, login: logInTextField.text!, status: "Новичек")
+            
+#if DEBUG
+            let currentUserService = TestUserService(user: user)
+    #else
+            let currentUserService = CurrentUserService(user: user)
+    #endif
+            let currentUser = currentUserService.entryLogin(login: user.login, password: user.password)
+            if currentUser == nil {
+                let alert = UIAlertController(title: "Неверный логин или пароль", message: "", preferredStyle: .actionSheet)
+                let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
+                    print("")
+                }
+                alert.addAction(cancelButton)
+                self.present(alert, animated: true)
+               
+            } else {
+                let vc = ProfileViewController(user: currentUser!)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        } else {
+            let alert = UIAlertController(title: "Введите логин и пароль", message: "", preferredStyle: .actionSheet)
+            let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
+                print("")
+            }
+            alert.addAction(cancelButton)
+            self.present(alert, animated: true)
+        }
     }
     
     private func setupGesture(){
