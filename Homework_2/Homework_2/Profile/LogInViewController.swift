@@ -9,6 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    var loginDelegate: LoginViewControllerDelegate?
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -129,33 +131,42 @@ class LogInViewController: UIViewController {
         ])
     }
     
-    
     @objc private func buttonPressed(){
         
         if (logInTextField.text != "" && passTextField.text != "") {
             
-            let user = User(userName: "Бездомный кот", password: passTextField.text!, avatar: UIImage(named: "cat3")!, login: logInTextField.text!, status: "Новичек")
+           // let user = User(userName: "Бездомный кот", password: passTextField.text!, avatar: UIImage(named: "cat3")!, login: logInTextField.text!, status: "Новичек")
             
+            let debugUser = User(userName: "Кот пират", password: passTextField.text!, avatar: UIImage(named: "cat5")!, login: logInTextField.text!, status: "Продвинутый")
+            let releaseUser = User(userName: "Кот боец", password: passTextField.text!, avatar: UIImage(named: "cat6")!, login: logInTextField.text!, status: "Местный")
+            
+                
 #if DEBUG
-            let debugUser = User(userName: "Test Cat", password: "123", avatar: UIImage(named: "cat4")!, login: "user", status: "Test")
-            let currentUserService = TestUserService(user: debugUser)
-    #else
-            let releaseUser = User(userName: "Coder Cat", password: "1234", avatar: UIImage(named: "cat2")!, login: "admin", status: "Эксперт")
-            let currentUserService = CurrentUserService(user: releaseUser)
-    #endif
-            let currentUser = currentUserService.entryLogin(login: user.login, password: user.password)
-            if currentUser == nil {
-                let alert = UIAlertController(title: "Неверный логин или пароль", message: "", preferredStyle: .actionSheet)
+            if (loginDelegate?.check(login: debugUser.login, password: debugUser.password)) == true {
+                let vc = ProfileViewController(user: debugUser)
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }  else { let alert = UIAlertController(title: "Неверный логин или пароль", message: "", preferredStyle: .actionSheet)
                 let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
                     print("")
                 }
                 alert.addAction(cancelButton)
                 self.present(alert, animated: true)
-               
-            } else {
-                let vc = ProfileViewController(user: currentUser!)
-                self.navigationController?.pushViewController(vc, animated: true)
             }
+#else
+            if (loginDelegate?.check(login: releaseUser.login, password: releaseUser.password)) == true {
+                let vc = ProfileViewController(user: releaseUser)
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }  else { let alert = UIAlertController(title: "Неверный логин или пароль", message: "", preferredStyle: .actionSheet)
+                let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
+                    print("")
+                }
+                alert.addAction(cancelButton)
+                self.present(alert, animated: true)
+            }
+#endif
+             
             
         } else {
             let alert = UIAlertController(title: "Введите логин и пароль", message: "", preferredStyle: .actionSheet)
@@ -165,6 +176,15 @@ class LogInViewController: UIViewController {
             alert.addAction(cancelButton)
             self.present(alert, animated: true)
         }
+//#if DEBUG
+            //let debugUser = User(userName: "Test Cat", password: "123", avatar: UIImage(named: "cat4")!, login: "user", status: "Test")
+            //let currentUserService = TestUserService(user: debugUser)
+    //#else
+            //let releaseUser = User(userName: "Coder Cat", password: "1234", avatar: UIImage(named: "cat2")!, login: "admin", status: "Эксперт")
+            //let currentUserService = CurrentUserService(user: releaseUser)
+    //#endif
+//            let currentUser = currentUserService.entryLogin(login: user.login, password: user.password)
+               // if currentUser == nil {
     }
     
     private func setupGesture(){
