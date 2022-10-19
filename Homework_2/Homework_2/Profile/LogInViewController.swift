@@ -9,6 +9,9 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    
+    var loginDelegate: LoginViewControllerDelegate?
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -136,23 +139,25 @@ class LogInViewController: UIViewController {
             
             let user = User(userName: "Бездомный кот", password: passTextField.text!, avatar: UIImage(named: "cat3")!, login: logInTextField.text!, status: "Новичек")
             
+            if (loginDelegate?.check(login: user.login, password: user.password)) == true {
+                print(user.login)
 #if DEBUG
-            let currentUserService = TestUserService(user: user)
+            let user1 = User(userName: "Кот пират", password: "1234", avatar: UIImage(named: "cat5")!, login: "pirat", status: "Продвинутый")
+                
     #else
-            let currentUserService = CurrentUserService(user: user)
+            let user1 = User(userName: "Кот боец", password: "12345", avatar: UIImage(named: "cat6")!, login: "karate", status: "Местный")
+                
     #endif
-            let currentUser = currentUserService.entryLogin(login: user.login, password: user.password)
-            if currentUser == nil {
+                let vc = ProfileViewController(user: user1)
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            } else {
                 let alert = UIAlertController(title: "Неверный логин или пароль", message: "", preferredStyle: .actionSheet)
                 let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
                     print("")
                 }
                 alert.addAction(cancelButton)
                 self.present(alert, animated: true)
-               
-            } else {
-                let vc = ProfileViewController(user: currentUser!)
-                self.navigationController?.pushViewController(vc, animated: true)
             }
             
         } else {
