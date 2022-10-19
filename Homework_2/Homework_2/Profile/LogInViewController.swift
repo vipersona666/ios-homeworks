@@ -131,8 +131,40 @@ class LogInViewController: UIViewController {
     
     
     @objc private func buttonPressed(){
-        let vc = ProfileViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        if (logInTextField.text != "" && passTextField.text != "") {
+            
+            let user = User(userName: "Бездомный кот", password: passTextField.text!, avatar: UIImage(named: "cat3")!, login: logInTextField.text!, status: "Новичек")
+            
+#if DEBUG
+            let debugUser = User(userName: "Test Cat", password: "123", avatar: UIImage(named: "cat4")!, login: "user", status: "Test")
+            let currentUserService = TestUserService(user: debugUser)
+    #else
+            let releaseUser = User(userName: "Coder Cat", password: "1234", avatar: UIImage(named: "cat2")!, login: "admin", status: "Эксперт")
+            let currentUserService = CurrentUserService(user: releaseUser)
+    #endif
+            let currentUser = currentUserService.entryLogin(login: user.login, password: user.password)
+            if currentUser == nil {
+                let alert = UIAlertController(title: "Неверный логин или пароль", message: "", preferredStyle: .actionSheet)
+                let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
+                    print("")
+                }
+                alert.addAction(cancelButton)
+                self.present(alert, animated: true)
+               
+            } else {
+                let vc = ProfileViewController(user: currentUser!)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        } else {
+            let alert = UIAlertController(title: "Введите логин и пароль", message: "", preferredStyle: .actionSheet)
+            let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
+                print("")
+            }
+            alert.addAction(cancelButton)
+            self.present(alert, animated: true)
+        }
     }
     
     private func setupGesture(){

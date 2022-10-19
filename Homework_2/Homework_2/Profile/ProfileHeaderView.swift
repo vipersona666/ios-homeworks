@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView{
+class ProfileHeaderView: UITableViewHeaderFooterView{
+    
+    weak var delegate: ProfileViewController?
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
@@ -71,8 +73,8 @@ class ProfileHeaderView: UIView{
     
     private lazy var statusText = ""
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         self.setupView()
         self.setupGesture()
     }
@@ -92,7 +94,7 @@ class ProfileHeaderView: UIView{
         NSLayoutConstraint.activate([
             self.avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             self.avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            self.avatarImageView.widthAnchor.constraint(equalToConstant: 120),
+            self.avatarImageView.widthAnchor.constraint(equalToConstant: 110),
             self.avatarImageView.heightAnchor.constraint(equalTo: self.avatarImageView.widthAnchor, multiplier: 1),
             
             self.nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
@@ -135,6 +137,12 @@ class ProfileHeaderView: UIView{
     @objc private func hideKeyboard(){
         self.endEditing(true)
         
+    }
+    
+    func setUser(user: User?){
+        avatarImageView.image = user?.avatar
+        nameLabel.text = user?.userName
+        infoLabel.text = user?.status
     }
     
 }

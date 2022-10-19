@@ -9,6 +9,16 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    let user: User?
+    
+    init(user: User){
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private var authorArray = ["", "Острые козырьки", "Рик и Морти", "Воспитанные волками", "Во все тяжкие                  (сериал 2008 – 2013) "]
     private var imageArray = ["cat2","Peaky", "rick", "volf", "Breaking"]
     private var descriptionArray = ["","Британский сериал о криминальном мире Бирмингема 20-х годов прошлого века, в котором многолюдная семья Шелби стала одной из самых жестоких и влиятельных гангстерских банд послевоенного времени. Фирменным знаком группировки, промышлявшей грабежами и азартными играми, стали зашитые в козырьки лезвия.","В центре сюжета - школьник по имени Морти и его дедушка Рик. Морти - самый обычный мальчик, который ничем не отличается от своих сверстников. А вот его дедуля занимается необычными научными исследованиями и зачастую полностью неадекватен. Он может в любое время дня и ночи схватить внука и отправиться вместе с ним в безумные приключения с помощью построенной из разного хлама летающей тарелки, которая способна перемещаться сквозь межпространственный тоннель. Каждый раз эта парочка оказывается в самых неожиданных местах и самых нелепых ситуациях.","2145 год. Человечество захлебнулось в кровопролитной войне между верующими и атеистами. Некоторое время спустя на планете Kepler-22b в меру удачно приземляется небольшое судно с двумя андроидами, которые называют друг друга Матерью и Отцом. Их миссия — вырастить из привезённых эмбрионов человеческих детёнышей и воспитать их атеистами.","Школьный учитель химии Уолтер Уайт узнаёт, что болен раком лёгких. Учитывая сложное финансовое состояние дел семьи, а также перспективы, Уолтер решает заняться изготовлением метамфетамина. Для этого он привлекает своего бывшего ученика Джесси Пинкмана, когда-то исключённого из школы при активном содействии Уайта. Пинкман сам занимался варкой мета, но накануне, в ходе рейда УБН, он лишился подельника и лаборатории."]
@@ -22,7 +32,7 @@ class ProfileViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(ProfileTableHederView.self, forHeaderFooterViewReuseIdentifier: "HeaderView")
+        tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: "HeaderView")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Default")
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "CustomCell")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotoCell")
@@ -43,7 +53,6 @@ class ProfileViewController: UIViewController {
         #else
         self.view.backgroundColor = .white
         #endif
-        self.tableView.backgroundColor = .white
         
         NSLayoutConstraint.activate([
             self.tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -59,9 +68,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? ProfileTableHederView else{
+            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderView") as? ProfileHeaderView else{
                 return nil
             }
+            headerView.delegate = self
+            headerView.setUser(user: user)
             return headerView
         }
         return nil
