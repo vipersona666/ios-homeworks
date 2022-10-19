@@ -137,9 +137,11 @@ class LogInViewController: UIViewController {
             let user = User(userName: "Бездомный кот", password: passTextField.text!, avatar: UIImage(named: "cat3")!, login: logInTextField.text!, status: "Новичек")
             
 #if DEBUG
-            let currentUserService = TestUserService(user: user)
+            let debugUser = User(userName: "Test Cat", password: "123", avatar: UIImage(named: "cat4")!, login: "user", status: "Test")
+            let currentUserService = TestUserService(user: debugUser)
     #else
-            let currentUserService = CurrentUserService(user: user)
+            let releaseUser = User(userName: "Coder Cat", password: "1234", avatar: UIImage(named: "cat2")!, login: "admin", status: "Эксперт")
+            let currentUserService = CurrentUserService(user: releaseUser)
     #endif
             let currentUser = currentUserService.entryLogin(login: user.login, password: user.password)
             if currentUser == nil {

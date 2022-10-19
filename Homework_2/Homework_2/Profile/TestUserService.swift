@@ -14,10 +14,12 @@ class TestUserService: UserService {
        init(user: User){
            self.user = user
        }
-
+    
+     //let testUser = User(userName: "Test Cat", password: "123", avatar: UIImage(named: "cat4")!, login: "user", status: "Test")
+    
     func entryLogin(login: String, password: String) -> User? {
-        let user = User(userName: "Test Cat", password: "123", avatar: UIImage(named: "cat4")!, login: "user", status: "Test")
-        if (user.login != login && user.password != password) {
+       
+        if (user!.login != login && user!.password != password) {
             print("Неверный логин или пароль")
             return nil
         } else{

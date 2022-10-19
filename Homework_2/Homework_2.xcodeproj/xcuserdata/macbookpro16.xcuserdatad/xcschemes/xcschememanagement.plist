@@ -12,7 +12,7 @@
 		<key>Release.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<key>StorageService.xcscheme</key>
 		<dict>
@@ -25,6 +25,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>B3451FB6289A821C0092DB6E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3B7372228CF7E5E00BBCA25</key>
 		<dict>
 			<key>primary</key>
 			<true/>
