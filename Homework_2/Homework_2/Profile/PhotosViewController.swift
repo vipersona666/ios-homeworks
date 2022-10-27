@@ -6,7 +6,11 @@
 //
 
 import UIKit
+import iOSIntPackage
 class PhotosViewController: UIViewController{
+    
+    private lazy var imageFasade = ImagePublisherFacade()
+    
     
     private lazy var layout: UICollectionViewFlowLayout = {
          let layout = UICollectionViewFlowLayout()
@@ -27,18 +31,40 @@ class PhotosViewController: UIViewController{
          return collectionView
      }()
     
-    private let dataSource: [String] = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40"]
-     
-    var data = 1
+    private let imageSource: [String] = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40"]
+    
+    private lazy var imageProcessor = ImageProcessor()
+    private var imagesArrayWithFilter: [UIImage] = []
+    
+    // добавляем фильтр на массив картинок и преобразуем String в UIImage
+    private func createImagesArrayWithFilter(imageSource: [String])  {
+        print("Подождите минутку, идет обработка фотографий")
+        
+        for i in 0...(imageSource.count - 1)  {
+            var imageWithFilter = UIImage()
+            imageProcessor.processImage(sourceImage: UIImage(named: imageSource[i])! , filter: .bloom(intensity: 5)) { imageWithFilter = $0 ?? UIImage(named: "1")! }
+            imagesArrayWithFilter.append(imageWithFilter)
+            
+        }
+        imageFasade.addImagesWithTimer(time: 1, repeat: 40, userImages: imagesArrayWithFilter)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Photo Gallery"
         self.navigationController?.navigationBar.isHidden = false
         self.setupConstraints()
+        self.createImagesArrayWithFilter(imageSource: imageSource)
+        
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.imageFasade.subscribe(self)
     }
     
     override func viewWillDisappear(_ animated: Bool){
         self.navigationController?.navigationBar.isHidden = true
+        self.imageFasade.removeSubscription(for: self)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -62,7 +88,7 @@ class PhotosViewController: UIViewController{
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.dataSource.count
+        return self.imagesArrayWithFilter.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -70,8 +96,11 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCell", for: indexPath)
             return cell
         }
+        // модель без фильтра
+        //let viewModel = PhotosCollectionViewCell.ViewModel(image: UIImage(named: imageSource[indexPath.row]))
+        // модель с применением фильтра
+        let viewModel = PhotosCollectionViewCell.ViewModel(image: imagesArrayWithFilter[indexPath.row])
         
-        let viewModel = PhotosCollectionViewCell.ViewModel(image: UIImage(named: dataSource[indexPath.row]))
         cell.setup(with: viewModel)
         cell.clipsToBounds = true
         return cell
@@ -88,9 +117,17 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ShowViewController()
-        let viewModel = ShowViewController.ViewModel(image: UIImage(named: dataSource[indexPath.row]))
+        let viewModel = ShowViewController.ViewModel(image: imagesArrayWithFilter[indexPath.row])
         vc.setup(with: viewModel)
         vc.modalPresentationStyle = .automatic
         self.present(vc, animated: true)
+    }
+}
+extension PhotosViewController: ImageLibrarySubscriber{
+    func receive(images: [UIImage]) {
+        
+        imagesArrayWithFilter = images
+        collectionView.reloadData()
+        //print("-----")
     }
 }

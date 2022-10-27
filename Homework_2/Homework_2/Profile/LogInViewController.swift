@@ -133,10 +133,11 @@ class LogInViewController: UIViewController {
     
     @objc private func buttonPressed(){
         
-        if (logInTextField.text != "" && passTextField.text != "") {
+        //временно снимем запрос логина и пароля
+        if (logInTextField.text == "" && passTextField.text == "") {
             
-           // let user = User(userName: "Бездомный кот", password: passTextField.text!, avatar: UIImage(named: "cat3")!, login: logInTextField.text!, status: "Новичек")
-            
+//            let user = User(userName: "Бездомный кот", password: passTextField.text!, avatar: UIImage(named: "cat3")!, login: logInTextField.text!, status: "Новичек")
+//            
             let debugUser = User(userName: "Кот пират", password: passTextField.text!, avatar: UIImage(named: "cat5")!, login: logInTextField.text!, status: "Продвинутый")
             let releaseUser = User(userName: "Кот боец", password: passTextField.text!, avatar: UIImage(named: "cat6")!, login: logInTextField.text!, status: "Местный")
             

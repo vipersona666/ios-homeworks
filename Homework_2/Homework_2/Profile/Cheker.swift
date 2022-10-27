@@ -15,15 +15,12 @@ class Checker{
     private let login = "pirat"
     private let password = "1234"
 #else
-    private let login = "karate"
-    private let password = "12345"
+    //временно убираем пароль и логин
+    private let login = ""
+    private let password = ""
 #endif
 
     func check(login: String, and password: String) -> Bool{
-        if self.login == login && self.password == password{
-            return true
-        } else {
-            return false
-        }
+        self.login == login && self.password == password
     }
 }
