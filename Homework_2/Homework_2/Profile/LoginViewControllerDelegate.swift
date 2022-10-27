@@ -12,9 +12,9 @@ protocol LoginViewControllerDelegate {
     func check(login: String, password: String) -> Bool
 }
 
-extension LoginViewControllerDelegate{
-
-    func check(login: String, password: String) -> Bool {
-         Checker.checker.check(login: login, and: password)
-    }
-}
+//extension LoginViewControllerDelegate{
+//
+//    func check(login: String, password: String) -> Bool {
+//         Checker.checker.check(login: login, and: password)
+//    }
+//}
