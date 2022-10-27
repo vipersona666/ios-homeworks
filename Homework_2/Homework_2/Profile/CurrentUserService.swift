@@ -15,10 +15,7 @@ class CurrentUserService: UserService{
         self.user = user
     }
     
-    //let currentUser = User(userName: "Coder Cat", password: "1234", avatar: UIImage(named: "cat2")!, login: "admin", status: "Эксперт")
-    
     func entryLogin(login: String, password: String) -> User? {
-        
         if (user?.login != login && user?.password != password) {
             print("Неверный логин или пароль")
             return nil
