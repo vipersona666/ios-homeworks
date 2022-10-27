@@ -29,6 +29,7 @@ class LogInViewController: UIViewController {
         let logIn = UITextField(frame: .zero)
         logIn.placeholder = "Email of phone"
         logIn.textColor = .black
+        logIn.text = "admin"
         logIn.font = UIFont.systemFont(ofSize: 16.0)
         logIn.tintColor = UIColor(named: "AccentColor")
         logIn.autocapitalizationType = .none
@@ -43,6 +44,7 @@ class LogInViewController: UIViewController {
         let pass = UITextField(frame: .zero)
         pass.placeholder = "Password"
         pass.textColor = .black
+        pass.text = "12345"
         pass.font = UIFont.systemFont(ofSize: 16.0)
         pass.tintColor = UIColor(named: "AccentColor")
         pass.autocapitalizationType = .none
@@ -133,8 +135,8 @@ class LogInViewController: UIViewController {
     
     @objc private func buttonPressed(){
         
-        //временно снимем запрос логина и пароля
-        if (logInTextField.text == "" && passTextField.text == "") {
+        
+        if (logInTextField.text != "" && passTextField.text != "") {
             
 //            let user = User(userName: "Бездомный кот", password: passTextField.text!, avatar: UIImage(named: "cat3")!, login: logInTextField.text!, status: "Новичек")
 //            

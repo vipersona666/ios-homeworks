@@ -16,8 +16,8 @@ class Checker{
     private let password = "1234"
 #else
     //временно убираем пароль и логин
-    private let login = ""
-    private let password = ""
+    private let login = "admin"
+    private let password = "12345"
 #endif
 
     func check(login: String, and password: String) -> Bool{
