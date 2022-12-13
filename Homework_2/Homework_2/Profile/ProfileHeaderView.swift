@@ -23,18 +23,28 @@ class ProfileHeaderView: UITableViewHeaderFooterView{
         return imageView
     }()
     
-    private lazy var editButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.backgroundColor = .blue
-        button.tintColor = .white
-        button.setTitle("Show status", for: .normal)
-        button.layer.cornerRadius = 12
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowOffset = CGSize(width: 6, height: 6)
-        button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private lazy var editButton: CustomButton = {
+//        let button = UIButton(frame: .zero)
+//        button.backgroundColor = .blue
+//        button.tintColor = .white
+//        button.setTitle("Show status", for: .normal)
+//        button.layer.cornerRadius = 12
+//        //button.layer.shadowColor = UIColor.black.cgColor
+//        button.layer.shadowOpacity = 0.7
+//        button.layer.shadowOffset = CGSize(width: 6, height: 6)
+//        button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+        let customButton = CustomButton(title: "Show status",
+                                        textColor: .white,
+                                        backgroundColorButton: .blue,
+                                        clipsToBoundsOfButton: false,
+                                        cornerRadius: 12,
+                                        shadowOpacity: 0.7,
+                                        shadowOffset: CGSize(width: 6, height: 6),
+                                        translatesAutoresizingMask: false)
+        customButton.addTarget = {self.buttonPressed()}
+        return customButton
     }()
     
     private lazy var nameLabel: UILabel = {
@@ -84,7 +94,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView{
     }
     
     private func setupView(){
-        self.backgroundColor = .lightGray
+        //self.backgroundColor = .lightGray
         self.addSubview(avatarImageView)
         self.addSubview(editButton)
         self.addSubview(nameLabel)
@@ -120,7 +130,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView{
 
     @objc private func buttonPressed(){
         infoLabel.text = statusText
-        print(statusText)
+        //print(statusText)
         textField.text = ""
         textField.resignFirstResponder()
     }

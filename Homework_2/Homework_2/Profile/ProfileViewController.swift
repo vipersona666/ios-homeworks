@@ -117,6 +117,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate{
         return cell
             
         }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             let vc = PhotosViewController()

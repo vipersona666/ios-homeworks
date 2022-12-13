@@ -123,9 +123,6 @@ class PhotosTableViewCell: UITableViewCell {
     
     @objc private func buttonPressed(){
         
-        
-        
-        
     }
 }
 
