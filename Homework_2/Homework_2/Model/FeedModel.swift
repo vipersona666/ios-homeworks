@@ -9,11 +9,11 @@ protocol FeedModelDelegate: AnyObject{
 }
 
 class FeedModel {
-    private weak var delegate: FeedModelDelegate?
+    //private weak var delegate: FeedModelDelegate?
     let secretWord = "secret"
     
     init(delegate: FeedModelDelegate){
-        self.delegate = delegate
+        //self.delegate = delegate
     }
 
     func check(word: String) -> Bool{
