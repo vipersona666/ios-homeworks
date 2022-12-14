@@ -29,6 +29,7 @@ class LogInViewController: UIViewController {
         let logIn = UITextField(frame: .zero)
         logIn.placeholder = "Email of phone"
         logIn.textColor = .black
+        logIn.text = "admin"
         logIn.font = UIFont.systemFont(ofSize: 16.0)
         logIn.tintColor = UIColor(named: "AccentColor")
         logIn.autocapitalizationType = .none
@@ -43,6 +44,7 @@ class LogInViewController: UIViewController {
         let pass = UITextField(frame: .zero)
         pass.placeholder = "Password"
         pass.textColor = .black
+        pass.text = "12345"
         pass.font = UIFont.systemFont(ofSize: 16.0)
         pass.tintColor = UIColor(named: "AccentColor")
         pass.autocapitalizationType = .none
@@ -66,17 +68,28 @@ class LogInViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var logInButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        let image = UIImage(named: "blue_pixel")
-        button.setBackgroundImage(image, for: .normal)
-        button.titleLabel?.textColor = .white
-        button.setTitle("Log In", for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private lazy var logInButton: CustomButton = {
+//        let button = UIButton(frame: .zero)
+//        let image = UIImage(named: "blue_pixel")
+//        button.setBackgroundImage(image, for: .normal)
+//        button.tintColor = .white
+//        button.setTitle("Log In", for: .normal)
+//        button.layer.cornerRadius = 10
+//        button.clipsToBounds = true
+//        button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+        let customButton = CustomButton(title: "Log In",
+                                        textColor: .white,
+                                        backgroundColorButton: UIColor(named: "AccentColor")!,
+                                        clipsToBoundsOfButton: true,
+                                        cornerRadius: 10,
+                                        shadowOpacity: 0,
+                                        shadowOffset: .zero,
+                                        translatesAutoresizingMask: false)
+        customButton.addTarget = {self.buttonPressed()}
+        return customButton
+//
     }()
 
     override func viewDidLoad() {
@@ -127,14 +140,14 @@ class LogInViewController: UIViewController {
             self.logInButton.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor),
             //self.logInButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.logInButton.heightAnchor.constraint(equalToConstant: 50),
-            self.logInButton.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: 16),
+            self.logInButton.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: 16)
         ])
     }
     
     @objc private func buttonPressed(){
         
-        //временно снимем запрос логина и пароля
-        if (logInTextField.text == "" && passTextField.text == "") {
+        
+        if (logInTextField.text != "" && passTextField.text != "") {
             
 //            let user = User(userName: "Бездомный кот", password: passTextField.text!, avatar: UIImage(named: "cat3")!, login: logInTextField.text!, status: "Новичек")
 //            
@@ -199,7 +212,7 @@ class LogInViewController: UIViewController {
             let keyboardHight = keyboardRect.height
             let loginButtonBottomPointY = self.logInButton.frame.origin.y + 50
             let keyboardOriginY = self.view.frame.height - keyboardHight
-            let offset = keyboardOriginY <= loginButtonBottomPointY ? loginButtonBottomPointY - keyboardOriginY + 16 : 0
+            let offset = keyboardOriginY <= loginButtonBottomPointY ? loginButtonBottomPointY - keyboardOriginY + 25 : 0
             
             self.scrollView.contentOffset = CGPoint(x: 0, y: offset)
         }
