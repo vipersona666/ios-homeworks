@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3016D7A297029FC00930475 /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3016D79297029FC00930475 /* BruteForce.swift */; };
 		B303C2F328E46BE4006B2B3F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B303C2F228E46BE4006B2B3F /* User.swift */; };
 		B325C8D628AA9AC3008B5D74 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C8D528AA9AC3008B5D74 /* LogInViewController.swift */; };
 		B325C8DA28AE8E33008B5D74 /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C8D928AE8E33008B5D74 /* ProfileTableHederView.swift */; };
@@ -65,6 +66,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B3016D79297029FC00930475 /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		B303C2F228E46BE4006B2B3F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B325C8D528AA9AC3008B5D74 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B325C8D928AE8E33008B5D74 /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				B353EE82290046FA00277849 /* LoginInspector.swift */,
 				B353EE842900473500277849 /* LoginViewControllerDelegate.swift */,
 				B3755A5E29112F2F00634FA2 /* CustomButton.swift */,
+				B3016D79297029FC00930475 /* BruteForce.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				B303C2F328E46BE4006B2B3F /* User.swift in Sources */,
 				B325C8DC28B4CD4B008B5D74 /* PostTableViewCell.swift in Sources */,
 				B353EE852900473500277849 /* LoginViewControllerDelegate.swift in Sources */,
+				B3016D7A297029FC00930475 /* BruteForce.swift in Sources */,
 				B3B7371D28C0F64C00BBCA25 /* ShowViewController.swift in Sources */,
 				B353EE7528FDE4D800277849 /* TestUserService.swift in Sources */,
 				B325C8D628AA9AC3008B5D74 /* LogInViewController.swift in Sources */,

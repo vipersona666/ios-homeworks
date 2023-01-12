@@ -11,6 +11,8 @@ class LogInViewController: UIViewController {
     
     var loginDelegate: LoginViewControllerDelegate?
     
+    let queue = DispatchQueue(label: "hackPassQueue", qos: .userInteractive)
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +46,7 @@ class LogInViewController: UIViewController {
         let pass = UITextField(frame: .zero)
         pass.placeholder = "Password"
         pass.textColor = .black
-        pass.text = "12345"
+        pass.text = "1"
         pass.font = UIFont.systemFont(ofSize: 16.0)
         pass.tintColor = UIColor(named: "AccentColor")
         pass.autocapitalizationType = .none
@@ -69,17 +71,7 @@ class LogInViewController: UIViewController {
     }()
     
     private lazy var logInButton: CustomButton = {
-//        let button = UIButton(frame: .zero)
-//        let image = UIImage(named: "blue_pixel")
-//        button.setBackgroundImage(image, for: .normal)
-//        button.tintColor = .white
-//        button.setTitle("Log In", for: .normal)
-//        button.layer.cornerRadius = 10
-//        button.clipsToBounds = true
-//        button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        return button
-        let customButton = CustomButton(title: "Log In",
+        let customButton = CustomButton(title: "Войти",
                                         textColor: .white,
                                         backgroundColorButton: UIColor(named: "AccentColor")!,
                                         clipsToBoundsOfButton: true,
@@ -89,7 +81,38 @@ class LogInViewController: UIViewController {
                                         translatesAutoresizingMask: false)
         customButton.addTarget = {self.buttonPressed()}
         return customButton
-//
+    }()
+    
+    private lazy var crackPasswordButton: CustomButton = {
+        let customButton = CustomButton(title: "Подобрать пароль",
+                                        textColor: .white,
+                                        backgroundColorButton: UIColor(named: "AccentColor")!,
+                                        clipsToBoundsOfButton: true,
+                                        cornerRadius: 10,
+                                        shadowOpacity: 0,
+                                        shadowOffset: .zero,
+                                        translatesAutoresizingMask: false)
+        customButton.addTarget = {self.crackButtonPressed()}
+        return customButton
+    }()
+    
+    private lazy var stackButton: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let ai = UIActivityIndicatorView(style: .medium)
+        ai.startAnimating()
+        ai.color = .gray
+        ai.hidesWhenStopped = true
+        ai.isHidden = true
+        ai.translatesAutoresizingMaskIntoConstraints = false
+        return ai
     }()
 
     override func viewDidLoad() {
@@ -98,10 +121,14 @@ class LogInViewController: UIViewController {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.logInImageView)
         self.scrollView.addSubview(self.stackView)
-        self.scrollView.addSubview(self.logInButton)
+        //self.scrollView.addSubview(self.logInButton)
+        self.scrollView.addSubview(self.stackButton)
         self.view.backgroundColor = .white
         self.stackView.addArrangedSubview(logInTextField)
         self.stackView.addArrangedSubview(passTextField)
+        self.stackButton.addArrangedSubview(logInButton)
+        self.stackButton.addArrangedSubview(crackPasswordButton)
+        self.view.addSubview(activityIndicator)
         self.setupView()
         self.setupGesture()
         self.navigationController?.navigationBar.isHidden = true
@@ -135,12 +162,15 @@ class LogInViewController: UIViewController {
             self.stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.stackView.heightAnchor.constraint(equalToConstant: 100),
             
-            self.logInButton.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16),
-            self.logInButton.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor),
-            self.logInButton.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor),
-            //self.logInButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.logInButton.heightAnchor.constraint(equalToConstant: 50),
-            self.logInButton.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: 16)
+            self.stackButton.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16),
+            self.stackButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+            self.stackButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
+            self.stackButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.stackButton.heightAnchor.constraint(equalToConstant: 108),
+            
+            self.activityIndicator.leadingAnchor.constraint(equalTo: stackButton.leadingAnchor, constant: 26),
+            self.activityIndicator.centerYAnchor.constraint(equalTo: stackView.centerYAnchor, constant: 26)
+      
         ])
     }
     
@@ -199,6 +229,39 @@ class LogInViewController: UIViewController {
     //#endif
 //            let currentUser = currentUserService.entryLogin(login: user.login, password: user.password)
                // if currentUser == nil {
+    }
+    
+    @objc private func crackButtonPressed(){
+        
+        var password = ""
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        self.passTextField.placeholder = ""
+        self.passTextField.text = ""
+        
+        queue.async {
+            password = self.bruteForce()
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                self.passTextField.isSecureTextEntry = false
+                self.passTextField.text = password
+            }
+        }
+    }
+    
+    private func passwordGenerate() -> String{
+        let len = 3
+        let pswdChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        let rndPswd = String((0..<len).compactMap{ _ in pswdChars.randomElement() })
+        print("New password: " + rndPswd)
+        return rndPswd
+    }
+    
+    private func bruteForce() -> String {
+        
+        let bruteForcePassword = BruteForce().bruteForce(passwordToUnlock: passwordGenerate())
+        return bruteForcePassword
     }
     
     private func setupGesture(){
