@@ -78,7 +78,12 @@ class FeedViewController: UIViewController {
         self.view.addSubview(checkTextField)
         self.view.addSubview(infoLabel)
         setupView()
+        setupGesture()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        self.checkTextField.becomeFirstResponder()
+    }
+    
     
     private func setupView(){
         NSLayoutConstraint.activate([
@@ -102,6 +107,8 @@ class FeedViewController: UIViewController {
         ])
     }
     
+    private var timer: Timer?
+    
     @objc private func didTapButton() {
         let vc = PostViewController()
         let post = Post(title: "Новый пост")
@@ -109,6 +116,7 @@ class FeedViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @objc private func checkTapButton() {
+        
         if (checkTextField.text! == ""){
             let alert = UIAlertController(title: "Это поле не может быть пустым! Введите слово для проверки!", message: .none, preferredStyle: .actionSheet)
             let cancelButton = UIAlertAction(title: "Ввести слово", style: .cancel) {_ in
@@ -116,16 +124,37 @@ class FeedViewController: UIViewController {
             alert.addAction(cancelButton)
             self.present(alert, animated: true)
         } else {
-            if (feedModel.check(word: checkTextField.text!)){
-                infoLabel.text = "Верно!"
-                infoLabel.backgroundColor = .green
-            } else {
-                infoLabel.text = "Не верно!"
-                infoLabel.backgroundColor = .red
-            }
+            timer = Timer.scheduledTimer(timeInterval: 2.0,
+                                             target: self,
+                                             selector: #selector(fireTimer),
+                                             userInfo: nil,
+                                             repeats: false)
         }
+    }
+    @objc private func fireTimer(){
+        
+        if (feedModel.check(word: checkTextField.text!)){
+            
+            infoLabel.text = "Верно!"
+            infoLabel.backgroundColor = .green
+        } else {
+            infoLabel.text = "Не верно!"
+            infoLabel.backgroundColor = .red
+        }
+        timer?.invalidate()
+        print("Timer fired!")
+    }
+    
+    private func setupGesture(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func hideKeyboard(){
+        view.endEditing(true)
         
     }
+    
 }
 extension FeedViewController: FeedModelDelegate{
 }
