@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B3016D7A297029FC00930475 /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3016D79297029FC00930475 /* BruteForce.swift */; };
 		B303C2F328E46BE4006B2B3F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B303C2F228E46BE4006B2B3F /* User.swift */; };
+		B305AB42297EC05C001ECC72 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B305AB41297EC05C001ECC72 /* NetworkManager.swift */; };
 		B325C8D628AA9AC3008B5D74 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C8D528AA9AC3008B5D74 /* LogInViewController.swift */; };
 		B325C8DA28AE8E33008B5D74 /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C8D928AE8E33008B5D74 /* ProfileTableHederView.swift */; };
 		B325C8DC28B4CD4B008B5D74 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C8DB28B4CD4B008B5D74 /* PostTableViewCell.swift */; };
@@ -68,6 +69,7 @@
 /* Begin PBXFileReference section */
 		B3016D79297029FC00930475 /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		B303C2F228E46BE4006B2B3F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B305AB41297EC05C001ECC72 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B325C8D528AA9AC3008B5D74 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B325C8D928AE8E33008B5D74 /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
 		B325C8DB28B4CD4B008B5D74 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				B3FCE95E294778F30038CD2D /* FeedModel.swift */,
+				B305AB41297EC05C001ECC72 /* NetworkManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				B353EE7528FDE4D800277849 /* TestUserService.swift in Sources */,
 				B325C8D628AA9AC3008B5D74 /* LogInViewController.swift in Sources */,
 				B3451FBB289A821C0092DB6E /* AppDelegate.swift in Sources */,
+				B305AB42297EC05C001ECC72 /* NetworkManager.swift in Sources */,
 				B3451FCF289A83080092DB6E /* FeedViewController.swift in Sources */,
 				B3B7374228CF8CAA00BBCA25 /* PostViewController.swift in Sources */,
 				B353EE81290046CB00277849 /* LoginFactory.swift in Sources */,

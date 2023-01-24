@@ -37,6 +37,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
+    
+        NetworkManager.request(for: .planets)
+        //NetworkManager.request(for: .people)
+        //NetworkManager.request(for: .starship)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
