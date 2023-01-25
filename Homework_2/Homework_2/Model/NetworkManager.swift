@@ -7,8 +7,18 @@
 
 import Foundation
 
-struct NetworkManager{
+struct Planet: Decodable{
+    var name: String
+    var orbitalPeriod: String
     
+    enum CodingKeys: String, CodingKey {
+        case name
+        case orbitalPeriod = "orbital_period"
+    }
+}
+
+struct NetworkManager{
+    // ДЗ 1
     enum AppConfiguration: String, CaseIterable {
         
         case people = "https://swapi.dev/api/people/8"
@@ -61,5 +71,76 @@ struct NetworkManager{
         }
         task.resume()
         }
+    
+    //ДЗ 2, задача 1
+    static func requestTitle(for url: String, completion: ((_ title: String?) -> Void)?) {
+        let session = URLSession(configuration: .default)
+        let url = URL(string: url)
+        let task = session.dataTask(with: url!) {data, response, error in
+            if let error = error{
+                print(error.localizedDescription)
+            }
+            
+            let statusCode = (response as? HTTPURLResponse)?.statusCode
+            if statusCode != 200 {
+                print("StatusCode != 200, statusCode = \(String(describing: statusCode))")
+            } else {
+                print("StatusCode = \(String(describing: statusCode))")
+            }
+                
+            guard let data else {
+                print("data = nil")
+               return
+            }
+            do{
+                if let answer =  try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                    let text = answer["title"] as? String {
+                    completion?(text)
+                    return
+                }
+                
+            } catch {
+                print(error.localizedDescription)
+                
+            }
+        }
+        task.resume()
+        }
+    
+    //ДЗ 2, задача 2
+    static func requestOrbitalPeriod(for url: String, completion: ((_ orbitalPeriod: String?) -> Void)?) {
+        let session = URLSession(configuration: .default)
+        let url = URL(string: url)
+        let task = session.dataTask(with: url!) {data, response, error in
+            if let error = error{
+                print(error.localizedDescription)
+            }
+            
+            let statusCode = (response as? HTTPURLResponse)?.statusCode
+            if statusCode != 200 {
+                print("StatusCode != 200, statusCode = \(String(describing: statusCode))")
+            } else {
+                print("StatusCode = \(String(describing: statusCode))")
+            }
+                
+            guard let data else {
+                print("data = nil")
+               return
+            }
+            do{
+                
+                let planet = try JSONDecoder().decode(Planet.self, from: data)
+                completion?(planet.orbitalPeriod)
+             
+            } catch {
+                print(error.localizedDescription)
+                
+            }
+        }
+        task.resume()
+        }
     }
+
+
+
 

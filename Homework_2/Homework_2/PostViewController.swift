@@ -14,13 +14,13 @@ class PostViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.title = titlePost
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "blue") ?? UIImage())
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self , action: #selector(didTabItem))
-        navigationItem.rightBarButtonItem = barButtonItem
+        //let barButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self , action: #selector(didTabItem))
+        //navigationItem.rightBarButtonItem = barButtonItem
     }
     
-    @objc private func didTabItem(){
-        let infoVC = InfoViewController()
-        infoVC.modalPresentationStyle = .popover
-        self.present(infoVC, animated: true)
-    }
+//    @objc private func didTabItem(){
+//        let infoVC = InfoViewController()
+//        infoVC.modalPresentationStyle = .popover
+//        self.present(infoVC, animated: true)
+//    }
 }
