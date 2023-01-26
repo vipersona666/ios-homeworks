@@ -16,25 +16,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         self.window = UIWindow(windowScene: windowScene)
-              let navController = UINavigationController(rootViewController: FeedViewController())
-              //let profileController = UINavigationController(rootViewController: LogInViewController())
-              //let profileController = UINavigationController(rootViewController: LogInViewController())
-              let tabBarController = UITabBarController()
-              tabBarController.tabBar.backgroundColor = .clear
-              //tabBarController.tabBar.barStyle = UIBarStyle.default
-              
-              let profileController = LogInViewController()
-              let loginFactoryVC = MyLoginFactory()
-              profileController.loginDelegate = loginFactoryVC.makeLoginInspector()
-              let profileViewController = UINavigationController(rootViewController: profileController)
-              tabBarController.tabBar.tintColor = UIColor.black
-              tabBarController.tabBar.unselectedItemTintColor = .gray
-              //tabBarController.viewControllers = [navController, profileController]
-              tabBarController.viewControllers = [navController, profileViewController]
-        tabBarController.viewControllers?.enumerated().forEach{
-            $1.tabBarItem.title = $0 == 0 ? "Главная" : "Профиль"
-            $1.tabBarItem.image = $0 == 0 ? UIImage(systemName: "note.text") : UIImage(systemName: "person")
-        }
+        
+        
+        let feedViewController = UINavigationController(rootViewController: FeedViewController())
+        
+        let profileController = LogInViewController()
+        let loginFactoryVC = MyLoginFactory()
+        profileController.loginDelegate = loginFactoryVC.makeLoginInspector()
+        let profileViewController = UINavigationController(rootViewController: profileController)
+        
+        let infoViewController = UINavigationController(rootViewController: InfoViewController())
+        
+        let tabBarController = UITabBarController()
+        tabBarController.tabBar.backgroundColor = .clear
+        tabBarController.tabBar.tintColor = UIColor.black
+        tabBarController.tabBar.unselectedItemTintColor = .gray
+        tabBarController.viewControllers = [feedViewController, profileViewController, infoViewController]
+        tabBarController.viewControllers?[0].tabBarItem.title = "Главная"
+        tabBarController.viewControllers?[1].tabBarItem.title = "Профиль"
+        tabBarController.viewControllers?[2].tabBarItem.title = "Инфо"
+        tabBarController.viewControllers?[0].tabBarItem.image = UIImage(systemName: "note.text")
+        tabBarController.viewControllers?[1].tabBarItem.image = UIImage(systemName: "person")
+        tabBarController.viewControllers?[2].tabBarItem.image = UIImage(systemName: "info")
+    
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
     
