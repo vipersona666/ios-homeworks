@@ -12,11 +12,11 @@ class Checker{
     private init() {}
 
 #if DEBUG
-    private let login = "pirat"
-    private let password = "1234"
+    private let login = ""
+    private let password = ""
 #else
     //временно убираем пароль и логин
-    private let login = "admin"
+    private let login = "1"
     private let password = "1"
 #endif
 

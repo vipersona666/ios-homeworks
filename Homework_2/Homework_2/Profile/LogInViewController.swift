@@ -31,7 +31,7 @@ class LogInViewController: UIViewController {
         let logIn = UITextField(frame: .zero)
         logIn.placeholder = "Email of phone"
         logIn.textColor = .black
-        logIn.text = "admin"
+        logIn.text = ""
         logIn.font = UIFont.systemFont(ofSize: 16.0)
         logIn.tintColor = UIColor(named: "AccentColor")
         logIn.autocapitalizationType = .none
@@ -46,7 +46,7 @@ class LogInViewController: UIViewController {
         let pass = UITextField(frame: .zero)
         pass.placeholder = "Password"
         pass.textColor = .black
-        pass.text = "1"
+        pass.text = ""
         pass.font = UIFont.systemFont(ofSize: 16.0)
         pass.tintColor = UIColor(named: "AccentColor")
         pass.autocapitalizationType = .none
@@ -96,6 +96,19 @@ class LogInViewController: UIViewController {
         return customButton
     }()
     
+    private lazy var signUpButton: CustomButton = {
+        let customButton = CustomButton(title: "Регистрация",
+                                        textColor: .white,
+                                        backgroundColorButton: UIColor(named: "AccentColor")!,
+                                        clipsToBoundsOfButton: true,
+                                        cornerRadius: 10,
+                                        shadowOpacity: 0,
+                                        shadowOffset: .zero,
+                                        translatesAutoresizingMask: false)
+        customButton.addTarget = {self.signUpButtonPressed()}
+        return customButton
+    }()
+    
     private lazy var stackButton: UIStackView = {
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .vertical
@@ -127,7 +140,7 @@ class LogInViewController: UIViewController {
         self.stackView.addArrangedSubview(logInTextField)
         self.stackView.addArrangedSubview(passTextField)
         self.stackButton.addArrangedSubview(logInButton)
-        self.stackButton.addArrangedSubview(crackPasswordButton)
+        self.stackButton.addArrangedSubview(signUpButton)
         self.view.addSubview(activityIndicator)
         self.setupView()
         self.setupGesture()
@@ -176,50 +189,85 @@ class LogInViewController: UIViewController {
     
     @objc private func buttonPressed(){
         
+        if (!logInTextField.text!.isEmpty && !passTextField.text!.isEmpty) {
+            let checkerService = CheckerService()
+            checkerService.checkCredentials(email: logInTextField.text!, password: passTextField.text!) { result in
+                switch result{
+                case .success(let user):
+                    let vc = ProfileViewController(user: user)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                case .failure(let error):
+                    print("Ошибка входа.", error.localizedDescription)
+                    let alarm = UIAlertController(title: "Ошибка входа", message: error.localizedDescription, preferredStyle: .alert)
+                                            let alarmAction = UIAlertAction(title: "Закрыть", style: .default)
+                                            alarm.addAction(alarmAction)
+                                            self.present(alarm, animated: true)
+                }
+            }
+        }
+    }
+    
+    @objc private func signUpButtonPressed(){
         
-        if (logInTextField.text != "" && passTextField.text != "") {
-            
-//            let user = User(userName: "Бездомный кот", password: passTextField.text!, avatar: UIImage(named: "cat3")!, login: logInTextField.text!, status: "Новичек")
-//            
-            let debugUser = User(userName: "Кот пират", password: passTextField.text!, avatar: UIImage(named: "cat5")!, login: logInTextField.text!, status: "Продвинутый")
-            let releaseUser = User(userName: "Кот боец", password: passTextField.text!, avatar: UIImage(named: "cat6")!, login: logInTextField.text!, status: "Местный")
+        if (!logInTextField.text!.isEmpty && !passTextField.text!.isEmpty) {
+            let checkerService = CheckerService()
+            checkerService.signUp(email: logInTextField.text!, password: passTextField.text!) { result in
+                switch result{
+                case .success(let user):
+                    let vc = ProfileViewController(user: user)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                case .failure(let error):
+                    print("Ошибка при регистрации.", error.localizedDescription)
+                    let alarm = UIAlertController(title: "Ошибка при регистрации", message: error.localizedDescription, preferredStyle: .alert)
+                                            let alarmAction = UIAlertAction(title: "Закрыть", style: .default)
+                                            alarm.addAction(alarmAction)
+                                            self.present(alarm, animated: true)
+                }
+                
+            }
+        }
+    }
+
+//            let debugUser = User(userName: "Кот пират", password: passTextField.text!, avatar: UIImage(named: "cat5")!, login: logInTextField.text!, status: "Продвинутый")
+//            let releaseUser = User(userName: "Кот боец", password: passTextField.text!, avatar: UIImage(named: "cat6")!, login: logInTextField.text!, status: "Местный")
             
                 
 #if DEBUG
-            if (loginDelegate?.check(login: debugUser.login, password: debugUser.password)) == true {
-                let vc = ProfileViewController(user: debugUser)
-                self.navigationController?.pushViewController(vc, animated: true)
+//            if (loginDelegate?.check(login: debugUser.login, password: debugUser.password)) == true {
+//                let vc = ProfileViewController(user: debugUser)
+//                self.navigationController?.pushViewController(vc, animated: true)
                 
-            }  else { let alert = UIAlertController(title: "Неверный логин или пароль", message: "", preferredStyle: .actionSheet)
-                let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
-                    print("")
-                }
-                alert.addAction(cancelButton)
-                self.present(alert, animated: true)
-            }
+//            }  else { let alert = UIAlertController(title: "Неверный логин или пароль", message: "", preferredStyle: .actionSheet)
+//                let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
+//                    print("")
+//                }
+//                alert.addAction(cancelButton)
+//                self.present(alert, animated: true)
+//            }
 #else
-            if (loginDelegate?.check(login: releaseUser.login, password: releaseUser.password)) == true {
-                let vc = ProfileViewController(user: releaseUser)
-                self.navigationController?.pushViewController(vc, animated: true)
-                
-            }  else { let alert = UIAlertController(title: "Неверный логин или пароль", message: "", preferredStyle: .actionSheet)
-                let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
-                    print("")
-                }
-                alert.addAction(cancelButton)
-                self.present(alert, animated: true)
-            }
+//            if (loginDelegate?.check(login: releaseUser.login, password: releaseUser.password)) == true {
+//                let vc = ProfileViewController(user: releaseUser)
+//                self.navigationController?.pushViewController(vc, animated: true)
+//
+//            }  else { let alert = UIAlertController(title: "Неверный логин или пароль", message: "", preferredStyle: .actionSheet)
+//                let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
+//                    print("")
+//                }
+//                alert.addAction(cancelButton)
+//                self.present(alert, animated: true)
+//            }
 #endif
-             
-            
-        } else {
-            let alert = UIAlertController(title: "Введите логин и пароль", message: "", preferredStyle: .actionSheet)
-            let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
-                print("")
-            }
-            alert.addAction(cancelButton)
-            self.present(alert, animated: true)
-        }
+//
+//
+//        } else {
+//            let alert = UIAlertController(title: "Введите логин и пароль", message: "", preferredStyle: .actionSheet)
+//            let cancelButton = UIAlertAction(title: "Ввести заново", style: .cancel) {_ in
+//                print("")
+//            }
+//            alert.addAction(cancelButton)
+//            self.present(alert, animated: true)
+//        }
 //#if DEBUG
             //let debugUser = User(userName: "Test Cat", password: "123", avatar: UIImage(named: "cat4")!, login: "user", status: "Test")
             //let currentUserService = TestUserService(user: debugUser)
@@ -229,25 +277,37 @@ class LogInViewController: UIViewController {
     //#endif
 //            let currentUser = currentUserService.entryLogin(login: user.login, password: user.password)
                // if currentUser == nil {
-    }
+    //}
+    
+    
     
     @objc private func crackButtonPressed(){
-        
-        var password = ""
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        self.passTextField.placeholder = ""
-        self.passTextField.text = ""
-        
-        queue.async {
-            password = self.bruteForce()
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
-                self.passTextField.isSecureTextEntry = false
-                self.passTextField.text = password
+        if self.passTextField.text != nil && self.passTextField.text!.count <= 3{
+            var password = ""
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+            self.passTextField.placeholder = ""
+            self.passTextField.text = ""
+            
+            queue.async {
+                password = self.bruteForce()
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    self.passTextField.isSecureTextEntry = false
+                    self.passTextField.text = password
+                }
             }
+        } else {
+            let alert = UIAlertController(title: "Пароль слишком сложный", message: "", preferredStyle: .actionSheet)
+            let cancelButton = UIAlertAction(title: "Закрыть", style: .cancel) {_ in
+                print("")
+            }
+            alert.addAction(cancelButton)
+            self.present(alert, animated: true)
+
         }
+        
     }
     
     private func passwordGenerate() -> String{
@@ -276,11 +336,11 @@ class LogInViewController: UIViewController {
             let loginButtonBottomPointY = self.logInButton.frame.origin.y + 50
             let keyboardOriginY = self.view.frame.height - keyboardHight
             let offset = keyboardOriginY <= loginButtonBottomPointY ? loginButtonBottomPointY - keyboardOriginY + 25 : 0
-            
+
             self.scrollView.contentOffset = CGPoint(x: 0, y: offset)
         }
     }
-    
+
     @objc private func didHideKeyboard(_ notification: Notification){
         self.hideKeyboard()
     }
