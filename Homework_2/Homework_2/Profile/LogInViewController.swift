@@ -202,11 +202,11 @@ class LogInViewController: UIViewController {
     }
     //проверка, если пользователь уже был залогинен, создаем юзера и заходим
     private func checkAuthUser(){
-        let lastAuthUser = realm.objects(AuthUser.self).last!
+        let lastAuthUser = realm.objects(AuthUser.self).last
         let user = UserDefaults.standard.string(forKey: "authKey")
-        if lastAuthUser.login == user {
+        if lastAuthUser != nil && lastAuthUser?.login == user {
             let checkerService = CheckerService()
-            checkerService.checkCredentials(email: lastAuthUser.login, password: lastAuthUser.password) { result in
+            checkerService.checkCredentials(email: lastAuthUser!.login, password: lastAuthUser!.password) { result in
                 switch result {
                 case .success(let user):
                     let vc = ProfileViewController(user: user)
@@ -214,18 +214,17 @@ class LogInViewController: UIViewController {
                     print("Выполнен автоматический вход")
                 case .failure(_):
                     print("Ошибка входа.")
-                    let alarm = UIAlertController(title: "Ошибка входа", message: "", preferredStyle: .alert)
+                    let alarm = UIAlertController(title: "Ошибка входа", message: "Введите заново логин и пароль", preferredStyle: .alert)
                                             let alarmAction = UIAlertAction(title: "Закрыть", style: .default)
                                             alarm.addAction(alarmAction)
                                             self.present(alarm, animated: true)
                 }
             }
-        } else {
+        }
+        else {
             print("Войдите или зарегистрируйтесь")
         }
-            
-        //print(lastAuthUser)
-        //print(user!)
+       
     }
     
     @objc private func buttonPressed(){
