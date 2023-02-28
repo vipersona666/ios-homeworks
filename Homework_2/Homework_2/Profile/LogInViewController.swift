@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class LogInViewController: UIViewController {
     
     var loginDelegate: LoginViewControllerDelegate?
+    
+    var authModel = AuthUser()
+    let realm = try! Realm()
     
     let queue = DispatchQueue(label: "hackPassQueue", qos: .userInteractive)
     
@@ -29,9 +33,10 @@ class LogInViewController: UIViewController {
     
     private lazy var logInTextField: UITextField = {
         let logIn = UITextField(frame: .zero)
-        logIn.placeholder = "Email of phone"
+        logIn.placeholder = "Email address"
         logIn.textColor = .black
         logIn.text = ""
+        logIn.keyboardType = .emailAddress
         logIn.font = UIFont.systemFont(ofSize: 16.0)
         logIn.tintColor = UIColor(named: "AccentColor")
         logIn.autocapitalizationType = .none
@@ -83,18 +88,18 @@ class LogInViewController: UIViewController {
         return customButton
     }()
     
-    private lazy var crackPasswordButton: CustomButton = {
-        let customButton = CustomButton(title: "Подобрать пароль",
-                                        textColor: .white,
-                                        backgroundColorButton: UIColor(named: "AccentColor")!,
-                                        clipsToBoundsOfButton: true,
-                                        cornerRadius: 10,
-                                        shadowOpacity: 0,
-                                        shadowOffset: .zero,
-                                        translatesAutoresizingMask: false)
-        customButton.addTarget = {self.crackButtonPressed()}
-        return customButton
-    }()
+//    private lazy var crackPasswordButton: CustomButton = {
+//        let customButton = CustomButton(title: "Подобрать пароль",
+//                                        textColor: .white,
+//                                        backgroundColorButton: UIColor(named: "AccentColor")!,
+//                                        clipsToBoundsOfButton: true,
+//                                        cornerRadius: 10,
+//                                        shadowOpacity: 0,
+//                                        shadowOffset: .zero,
+//                                        translatesAutoresizingMask: false)
+//        customButton.addTarget = {self.crackButtonPressed()}
+//        return customButton
+//    }()
     
     private lazy var signUpButton: CustomButton = {
         let customButton = CustomButton(title: "Регистрация",
@@ -145,6 +150,7 @@ class LogInViewController: UIViewController {
         self.setupView()
         self.setupGesture()
         self.navigationController?.navigationBar.isHidden = true
+        self.checkAuthUser()
     }
     override func viewDidAppear(_ animated: Bool) {
         self.logInTextField.becomeFirstResponder()
@@ -152,8 +158,8 @@ class LogInViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didShowKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didHideKeyboard(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.didShowKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.didHideKeyboard(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     
     
@@ -187,6 +193,40 @@ class LogInViewController: UIViewController {
         ])
     }
     
+    private func saveRealm(login: String, password: String){
+        try! realm.write({
+            authModel.login = login
+            authModel.password = password
+            realm.add(authModel)
+        })
+    }
+    //проверка, если пользователь уже был залогинен, создаем юзера и заходим
+    private func checkAuthUser(){
+        let lastAuthUser = realm.objects(AuthUser.self).last
+        let user = UserDefaults.standard.string(forKey: "authKey")
+        if lastAuthUser != nil && lastAuthUser?.login == user {
+            let checkerService = CheckerService()
+            checkerService.checkCredentials(email: lastAuthUser!.login, password: lastAuthUser!.password) { result in
+                switch result {
+                case .success(let user):
+                    let vc = ProfileViewController(user: user)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    print("Выполнен автоматический вход")
+                case .failure(_):
+                    print("Ошибка входа.")
+                    let alarm = UIAlertController(title: "Ошибка входа", message: "Введите заново логин и пароль", preferredStyle: .alert)
+                                            let alarmAction = UIAlertAction(title: "Закрыть", style: .default)
+                                            alarm.addAction(alarmAction)
+                                            self.present(alarm, animated: true)
+                }
+            }
+        }
+        else {
+            print("Войдите или зарегистрируйтесь")
+        }
+       
+    }
+    
     @objc private func buttonPressed(){
         
         if (!logInTextField.text!.isEmpty && !passTextField.text!.isEmpty) {
@@ -196,7 +236,9 @@ class LogInViewController: UIViewController {
                 case .success(let user):
                     let vc = ProfileViewController(user: user)
                     self.navigationController?.pushViewController(vc, animated: true)
-                    
+                    //сохраняем пользователя в базу рилм
+                    self.saveRealm(login: self.logInTextField.text!, password: self.passTextField.text!)
+                    UserDefaults.standard.set(self.logInTextField.text!, forKey: "authKey")
                 case .failure(let error):
                     print("Ошибка входа.", error.localizedDescription)
                     let alarm = UIAlertController(title: "Ошибка входа", message: error.localizedDescription, preferredStyle: .alert)
@@ -217,6 +259,9 @@ class LogInViewController: UIViewController {
                 case .success(let user):
                     let vc = ProfileViewController(user: user)
                     self.navigationController?.pushViewController(vc, animated: true)
+                    //сохраняем пользователя в базу рилм
+                    self.saveRealm(login: self.logInTextField.text!, password: self.passTextField.text!)
+                    UserDefaults.standard.set(self.logInTextField.text!, forKey: "authKey")
                 case .failure(let error):
                     print("Ошибка при регистрации.", error.localizedDescription)
                     let alarm = UIAlertController(title: "Ошибка при регистрации", message: error.localizedDescription, preferredStyle: .alert)
@@ -281,7 +326,7 @@ class LogInViewController: UIViewController {
     
     
     
-    @objc private func crackButtonPressed(){
+    /*@objc private func crackButtonPressed(){
         if self.passTextField.text != nil && self.passTextField.text!.count <= 3{
             var password = ""
             activityIndicator.isHidden = false
@@ -322,7 +367,7 @@ class LogInViewController: UIViewController {
         
         let bruteForcePassword = BruteForce().bruteForce(passwordToUnlock: passwordGenerate())
         return bruteForcePassword
-    }
+    }*/
     
     private func setupGesture(){
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
