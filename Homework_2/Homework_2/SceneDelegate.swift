@@ -27,8 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let profileViewController = UINavigationController(rootViewController: profileController)
         
         let infoViewController = UINavigationController(rootViewController: InfoViewController())
-        let selectedViewController = UINavigationController(rootViewController: PostViewController())
-        
+        let selectedViewController = UINavigationController(rootViewController: SelectedViewController())
         
         let tabBarController = UITabBarController()
         tabBarController.tabBar.backgroundColor = .clear

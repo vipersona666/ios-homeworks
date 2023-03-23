@@ -11,6 +11,9 @@
 		B302C41E29853696004FC868 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B302C41D29853696004FC868 /* FirebaseAuth */; };
 		B303C2F328E46BE4006B2B3F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B303C2F228E46BE4006B2B3F /* User.swift */; };
 		B305AB42297EC05C001ECC72 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B305AB41297EC05C001ECC72 /* NetworkManager.swift */; };
+		B307C91229C865DB00002D32 /* Post.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B307C91029C865DB00002D32 /* Post.xcdatamodeld */; };
+		B307C91429C86BE700002D32 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307C91329C86BE700002D32 /* CoreDataManager.swift */; };
+		B307C91629C9E7FB00002D32 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307C91529C9E7FB00002D32 /* Post.swift */; };
 		B325C8D628AA9AC3008B5D74 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C8D528AA9AC3008B5D74 /* LogInViewController.swift */; };
 		B325C8DA28AE8E33008B5D74 /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C8D928AE8E33008B5D74 /* ProfileTableHederView.swift */; };
 		B325C8DC28B4CD4B008B5D74 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C8DB28B4CD4B008B5D74 /* PostTableViewCell.swift */; };
@@ -77,6 +80,9 @@
 		B3016D79297029FC00930475 /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		B303C2F228E46BE4006B2B3F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B305AB41297EC05C001ECC72 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		B307C91129C865DB00002D32 /* Post.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Post.xcdatamodel; sourceTree = "<group>"; };
+		B307C91329C86BE700002D32 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B307C91529C9E7FB00002D32 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		B325C8D528AA9AC3008B5D74 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B325C8D928AE8E33008B5D74 /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
 		B325C8DB28B4CD4B008B5D74 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -138,6 +144,7 @@
 		B3451FAE289A821C0092DB6E = {
 			isa = PBXGroup;
 			children = (
+				B307C91029C865DB00002D32 /* Post.xcdatamodeld */,
 				B3451FB9289A821C0092DB6E /* Homework_2 */,
 				B3B7372428CF7E5E00BBCA25 /* StorageService */,
 				B3451FB8289A821C0092DB6E /* Products */,
@@ -213,7 +220,9 @@
 			children = (
 				B3FCE95E294778F30038CD2D /* FeedModel.swift */,
 				B305AB41297EC05C001ECC72 /* NetworkManager.swift */,
+				B307C91329C86BE700002D32 /* CoreDataManager.swift */,
 				B394A1DE29A3D56900A5CF3A /* AuthModel.swift */,
+				B307C91529C9E7FB00002D32 /* Post.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -353,6 +362,8 @@
 				B3B5008129A6AEED00B930D8 /* SelectedViewController.swift in Sources */,
 				B3FCE95F294778F30038CD2D /* FeedModel.swift in Sources */,
 				B394A1DF29A3D56900A5CF3A /* AuthModel.swift in Sources */,
+				B307C91629C9E7FB00002D32 /* Post.swift in Sources */,
+				B307C91429C86BE700002D32 /* CoreDataManager.swift in Sources */,
 				B303C2F328E46BE4006B2B3F /* User.swift in Sources */,
 				B325C8DC28B4CD4B008B5D74 /* PostTableViewCell.swift in Sources */,
 				B353EE852900473500277849 /* LoginViewControllerDelegate.swift in Sources */,
@@ -365,6 +376,7 @@
 				B3451FCF289A83080092DB6E /* FeedViewController.swift in Sources */,
 				B3B7374228CF8CAA00BBCA25 /* PostViewController.swift in Sources */,
 				B353EE81290046CB00277849 /* LoginFactory.swift in Sources */,
+				B307C91229C865DB00002D32 /* Post.xcdatamodeld in Sources */,
 				B3755A5F29112F2F00634FA2 /* CustomButton.swift in Sources */,
 				B3451FBD289A821C0092DB6E /* SceneDelegate.swift in Sources */,
 				B3C48AB0289D2EB2001934EB /* ProfileViewController.swift in Sources */,
@@ -714,6 +726,19 @@
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		B307C91029C865DB00002D32 /* Post.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B307C91129C865DB00002D32 /* Post.xcdatamodel */,
+			);
+			currentVersion = B307C91129C865DB00002D32 /* Post.xcdatamodel */;
+			path = Post.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B3451FAF289A821C0092DB6E /* Project object */;
 }

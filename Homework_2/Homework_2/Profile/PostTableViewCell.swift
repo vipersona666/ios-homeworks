@@ -6,15 +6,23 @@
 //
 
 import UIKit
+import CoreData
+
 
 class PostTableViewCell: UITableViewCell {
     
+    
+    var index: IndexPath?
+    let coreDataManager = CoreDataManager.shared
+
+    
     struct ViewModel{
         let author: String
-        let image: UIImage?
+        let image: String
         let description: String
         let likes: Int
         let views: Int
+        let uniqID: String
     }
     
     private lazy var authorLabel: UILabel = {
@@ -68,15 +76,31 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(with viewmodel: ViewModel){
+    func setup(with viewmodel: ViewModel) {
         self.authorLabel.text = viewmodel.author
-        self.postImageView.image = viewmodel.image
+        self.postImageView.image = UIImage(named: viewmodel.image)
         self.descriptionLabel.text = viewmodel.description
         self.likesLabel.text = "Likes: \(viewmodel.likes)"
         self.viewsLabel.text = "Views: \(viewmodel.views)"
+       coreDataManager.reloadPosts()
     }
     
+    func setupSelectedPost(post: String){
+        coreDataManager.reloadPosts()
+        if let index = coreDataManager.posts.firstIndex(where: { $0.id == post })  {
+            authorLabel.text = coreDataManager.posts[index].title
+            postImageView.image = UIImage(named: coreDataManager.posts[index].image!)
+            descriptionLabel.text = coreDataManager.posts[index].descriptionPost
+            likesLabel.text = "Likes: \(coreDataManager.posts[index].likes)"
+            viewsLabel.text = "Views: \(coreDataManager.posts[index].views)"
+        }
+    }
+    
+    
     private func setupView(){
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTap))
+        doubleTap.numberOfTapsRequired = 2
+        addGestureRecognizer(doubleTap)
         self.addSubview(self.authorLabel)
         self.addSubview(self.postImageView)
         self.addSubview(self.descriptionLabel)
@@ -107,4 +131,18 @@ class PostTableViewCell: UITableViewCell {
         ])
     }
     
+    @objc func doubleTap() {
+        let model = posts
+           if index != nil {
+               if let _ = coreDataManager.posts.firstIndex(where: { $0.id == model[index!.section].id }) {
+                   print("Эта запись уже в избранном!")
+               } else {
+                   print(model[index!.section].author)
+                   coreDataManager.createPost (title: model[index!.section].author , descriptionPost: model[index!.section].description, image: model[index!.section].image, likes: Int16(model[index!.section].likes), views: Int16(model[index!.section].views), id: model[index!.section].id)
+                   coreDataManager.reloadPosts()
+                 
+               }
+           }
+        
+       }
 }
