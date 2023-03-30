@@ -5,7 +5,7 @@
 //  Created by Андрей Байдаченко on 12.01.2023.
 //
 
-import UIKit
+import Foundation
 
 class BruteForce{
     func bruteForce(passwordToUnlock: String) -> String {

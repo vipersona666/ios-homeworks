@@ -28,22 +28,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let infoViewController = UINavigationController(rootViewController: InfoViewController())
         let selectedViewController = UINavigationController(rootViewController: SelectedViewController())
+        let mapViewController = UINavigationController(rootViewController: MapViewController())
         
         let tabBarController = UITabBarController()
         tabBarController.tabBar.backgroundColor = .clear
         tabBarController.tabBar.tintColor = UIColor.black
         tabBarController.tabBar.unselectedItemTintColor = .gray
         
-        tabBarController.viewControllers = [feedViewController, profileViewController, infoViewController, selectedViewController]
+        tabBarController.viewControllers = [feedViewController, profileViewController, infoViewController, selectedViewController, mapViewController]
         
         tabBarController.viewControllers?[0].tabBarItem.title = "Главная"
         tabBarController.viewControllers?[1].tabBarItem.title = "Профиль"
         tabBarController.viewControllers?[2].tabBarItem.title = "Инфо"
         tabBarController.viewControllers?[3].tabBarItem.title = "Избранное"
+        tabBarController.viewControllers?[4].tabBarItem.title = "Карта"
         tabBarController.viewControllers?[0].tabBarItem.image = UIImage(systemName: "note.text")
         tabBarController.viewControllers?[1].tabBarItem.image = UIImage(systemName: "person")
         tabBarController.viewControllers?[2].tabBarItem.image = UIImage(systemName: "info")
         tabBarController.viewControllers?[3].tabBarItem.image = UIImage(systemName: "star")
+        tabBarController.viewControllers?[4].tabBarItem.image = UIImage(systemName: "map")
     
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()

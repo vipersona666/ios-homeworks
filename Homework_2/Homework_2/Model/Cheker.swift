@@ -5,7 +5,7 @@
 //  Created by Андрей Байдаченко on 19.10.2022.
 //
 
-import UIKit
+import Foundation
 
 class Checker{
     static let checker = Checker()
