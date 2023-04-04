@@ -35,7 +35,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView{
 //        button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
 //        button.translatesAutoresizingMaskIntoConstraints = false
 //        return button
-        let customButton = CustomButton(title: "Show status",
+        let customButton = CustomButton(title: "show_status".localized,
                                         textColor: .white,
                                         backgroundColorButton: .blue,
                                         clipsToBoundsOfButton: false,
@@ -49,7 +49,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView{
     
     private lazy var nameLabel: UILabel = {
         let name = UILabel(frame: .zero)
-        name.text = "Coder Cat"
+        name.text = "Something Cat"
         name.textColor = .black
         name.font = UIFont.boldSystemFont(ofSize: 18.0)
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +70,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView{
         text.backgroundColor = .white
         text.font = UIFont.systemFont(ofSize: 15)
         text.textColor = .black
-        text.placeholder = "set the status"
+        text.placeholder = "status".localized
         text.textAlignment = .center
         text.layer.cornerRadius = 12
         text.layer.borderWidth = 1

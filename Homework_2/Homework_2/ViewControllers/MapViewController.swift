@@ -36,7 +36,6 @@ final class MapViewController: UIViewController, MKMapViewDelegate, CLLocationMa
     private func setupView(){
         view.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             mapView.topAnchor.constraint(equalTo: view.topAnchor),
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -59,7 +58,7 @@ final class MapViewController: UIViewController, MKMapViewDelegate, CLLocationMa
     private func addPins(){
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2D(latitude: 55.7499, longitude: 37.6290)
-        annotation.title = "Москва"
+        annotation.title = "moscow".localized
         mapView.addAnnotation(annotation)
     }
     //прокладка маршрута
@@ -113,7 +112,7 @@ final class MapViewController: UIViewController, MKMapViewDelegate, CLLocationMa
     func addAnnotation(location: CLLocationCoordinate2D){
             let annotation = MKPointAnnotation()
             annotation.coordinate = location
-            annotation.title = "Pin"
+        annotation.title = "pin".localized
             self.mapView.addAnnotation(annotation)
     }
     

@@ -44,7 +44,6 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Back"
         self.setupConstraints()
     }
  

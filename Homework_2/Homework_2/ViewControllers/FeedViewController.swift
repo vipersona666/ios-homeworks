@@ -15,7 +15,7 @@ class FeedViewController: UIViewController {
     private lazy var feedModel = FeedModel(delegate: self)
     
     private lazy var button: CustomButton = {
-        let customButton = CustomButton(title: "Перейти на пост",
+        let customButton = CustomButton(title: "go_to_post".localized,
                                         textColor: .white,
                                         backgroundColorButton: .darkGray,
                                         clipsToBoundsOfButton: false,
@@ -28,7 +28,7 @@ class FeedViewController: UIViewController {
     }()
     
     private lazy var checkGuessButton: CustomButton = {
-        let customButton = CustomButton(title: "Проверка слова",
+        let customButton = CustomButton(title: "check_word".localized,
                                         textColor: .white,
                                         backgroundColorButton: .darkGray,
                                         clipsToBoundsOfButton: false,
@@ -54,7 +54,7 @@ class FeedViewController: UIViewController {
     private lazy var checkTextField: UITextField = {
         let textField = UITextField(frame: .zero)
         textField.attributedPlaceholder = NSAttributedString(
-            string: "Введите слово",
+            string: "enter_word".localized,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightText])
         textField.textColor = .white
         textField.text = ""
@@ -72,7 +72,7 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "trava1.jpeg") ?? UIImage())
-        self.navigationItem.title = "Лента"
+        self.navigationItem.title = "feed".localized
         self.view.addSubview(button)
         self.view.addSubview(checkGuessButton)
         self.view.addSubview(checkTextField)
@@ -111,15 +111,16 @@ class FeedViewController: UIViewController {
     
     @objc private func didTapButton() {
         let vc = PostViewController()
-        let post = Post(title: "Новый пост")
+        let post = Post(title: "new_post".localized)
         vc.titlePost = post.title
         self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     @objc private func checkTapButton() {
         
         if (checkTextField.text! == ""){
-            let alert = UIAlertController(title: "Это поле не может быть пустым! Введите слово для проверки!", message: .none, preferredStyle: .actionSheet)
-            let cancelButton = UIAlertAction(title: "Ввести слово", style: .cancel) {_ in
+            let alert = UIAlertController(title: "alert_check_word".localized, message: .none, preferredStyle: .actionSheet)
+            let cancelButton = UIAlertAction(title: "enter_word".localized, style: .cancel) {_ in
             }
             alert.addAction(cancelButton)
             self.present(alert, animated: true)
@@ -135,10 +136,10 @@ class FeedViewController: UIViewController {
         
         if (feedModel.check(word: checkTextField.text!)){
             
-            infoLabel.text = "Верно!"
+            infoLabel.text = "right".localized
             infoLabel.backgroundColor = .green
         } else {
-            infoLabel.text = "Не верно!"
+            infoLabel.text = "wrong".localized
             infoLabel.backgroundColor = .red
         }
         timer?.invalidate()

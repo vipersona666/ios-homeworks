@@ -17,7 +17,7 @@ class BruteForce{
         password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
             //print(password)
         }
-        print("Готово! Пароль: " + password)
+        print("brutforce".localized + password)
         return password
     }
 }

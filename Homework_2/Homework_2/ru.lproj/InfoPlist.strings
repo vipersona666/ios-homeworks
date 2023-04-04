@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  Homework_2
+
+  Created by Андрей Байдаченко on 03.04.2023.
+  
+*/
+NSLocationWhenInUseUsageDescription = "Для работы с картами, разрешите использовать ваше местоположение";

@@ -10,7 +10,7 @@ import UIKit
 class InfoViewController: UIViewController {
     
     private lazy var buttonInfo: CustomButton = {
-        let customButton = CustomButton(title: "Ответ от сервера",
+        let customButton = CustomButton(title: "response_server".localized,
                                         textColor: .white,
                                         backgroundColorButton: .darkGray,
                                         clipsToBoundsOfButton: false,
@@ -69,7 +69,7 @@ class InfoViewController: UIViewController {
         }
         NetworkManager.requestOrbitalPeriod(for: "https://swapi.dev/api/planets/1") { orbitalPeriod in
             DispatchQueue.main.async {
-                self.labelOrbitalPlanet.text = "Период обращения планеты: \(orbitalPeriod ?? "нет данных")"
+                self.labelOrbitalPlanet.text = "period".localized + (orbitalPeriod ?? "no_data".localized)
             }
         }
         

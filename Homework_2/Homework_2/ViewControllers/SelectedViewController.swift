@@ -40,7 +40,7 @@ class SelectedViewController: UIViewController {
     
     private func setupConstraints(){
         navigationItem.largeTitleDisplayMode = .automatic
-                navigationItem.title = "Избранное"
+        navigationItem.title = "favorites".localized
         
         self.view.addSubview(self.tableView)
         self.view.backgroundColor = .gray

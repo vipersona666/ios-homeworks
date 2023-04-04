@@ -33,7 +33,7 @@ class LogInViewController: UIViewController {
     
     private lazy var logInTextField: UITextField = {
         let logIn = UITextField(frame: .zero)
-        logIn.placeholder = "Email address"
+        logIn.placeholder = "email".localized
         logIn.textColor = .black
         logIn.text = ""
         logIn.keyboardType = .emailAddress
@@ -49,7 +49,7 @@ class LogInViewController: UIViewController {
     
     private lazy var passTextField: UITextField = {
         let pass = UITextField(frame: .zero)
-        pass.placeholder = "Password"
+        pass.placeholder = "password".localized
         pass.textColor = .black
         pass.text = ""
         pass.font = UIFont.systemFont(ofSize: 16.0)
@@ -76,7 +76,7 @@ class LogInViewController: UIViewController {
     }()
     
     private lazy var logInButton: CustomButton = {
-        let customButton = CustomButton(title: "Войти",
+        let customButton = CustomButton(title: "sign_in".localized,
                                         textColor: .white,
                                         backgroundColorButton: UIColor(named: "AccentColor")!,
                                         clipsToBoundsOfButton: true,
@@ -102,7 +102,7 @@ class LogInViewController: UIViewController {
 //    }()
     
     private lazy var signUpButton: CustomButton = {
-        let customButton = CustomButton(title: "Регистрация",
+        let customButton = CustomButton(title: "sign_up".localized,
                                         textColor: .white,
                                         backgroundColorButton: UIColor(named: "AccentColor")!,
                                         clipsToBoundsOfButton: true,
@@ -135,7 +135,7 @@ class LogInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Профиль"
+        //self.navigationItem.title = "Профиль"
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.logInImageView)
         self.scrollView.addSubview(self.stackView)
@@ -211,18 +211,18 @@ class LogInViewController: UIViewController {
                 case .success(let user):
                     let vc = ProfileViewController(user: user)
                     self.navigationController?.pushViewController(vc, animated: true)
-                    print("Выполнен автоматический вход")
+                    print("auto_login".localized)
                 case .failure(_):
-                    print("Ошибка входа.")
-                    let alarm = UIAlertController(title: "Ошибка входа", message: "Введите заново логин и пароль", preferredStyle: .alert)
-                                            let alarmAction = UIAlertAction(title: "Закрыть", style: .default)
+                    print("login_error".localized)
+                    let alarm = UIAlertController(title: "login_error".localized, message: "enter_login_and_password".localized, preferredStyle: .alert)
+                    let alarmAction = UIAlertAction(title: "close".localized, style: .default)
                                             alarm.addAction(alarmAction)
                                             self.present(alarm, animated: true)
                 }
             }
         }
         else {
-            print("Войдите или зарегистрируйтесь")
+            print("sign_in_or_sign_up".localized)
         }
        
     }
@@ -240,9 +240,9 @@ class LogInViewController: UIViewController {
                     self.saveRealm(login: self.logInTextField.text!, password: self.passTextField.text!)
                     UserDefaults.standard.set(self.logInTextField.text!, forKey: "authKey")
                 case .failure(let error):
-                    print("Ошибка входа.", error.localizedDescription)
-                    let alarm = UIAlertController(title: "Ошибка входа", message: error.localizedDescription, preferredStyle: .alert)
-                                            let alarmAction = UIAlertAction(title: "Закрыть", style: .default)
+                    print("login_error".localized, error.localizedDescription)
+                    let alarm = UIAlertController(title: "login_error".localized, message: error.localizedDescription, preferredStyle: .alert)
+                    let alarmAction = UIAlertAction(title: "close".localized, style: .default)
                                             alarm.addAction(alarmAction)
                                             self.present(alarm, animated: true)
                 }
@@ -263,9 +263,9 @@ class LogInViewController: UIViewController {
                     self.saveRealm(login: self.logInTextField.text!, password: self.passTextField.text!)
                     UserDefaults.standard.set(self.logInTextField.text!, forKey: "authKey")
                 case .failure(let error):
-                    print("Ошибка при регистрации.", error.localizedDescription)
-                    let alarm = UIAlertController(title: "Ошибка при регистрации", message: error.localizedDescription, preferredStyle: .alert)
-                                            let alarmAction = UIAlertAction(title: "Закрыть", style: .default)
+                    print("registration_error".localized, error.localizedDescription)
+                    let alarm = UIAlertController(title: "registration_error".localized, message: error.localizedDescription, preferredStyle: .alert)
+                    let alarmAction = UIAlertAction(title: "close".localized, style: .default)
                                             alarm.addAction(alarmAction)
                                             self.present(alarm, animated: true)
                 }
@@ -393,6 +393,9 @@ class LogInViewController: UIViewController {
         self.view.endEditing(true)
         self.scrollView.setContentOffset(.zero, animated: true)
     }
-    
-    
+}
+extension String{
+    var localized: String{
+        NSLocalizedString(self, comment: "")
+    }
 }

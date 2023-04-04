@@ -24,7 +24,7 @@ class CheckerService: CheckerServiceProtocol{
             if error == nil{
                 if let result = authResult{
                     print("User UID:", result.user.uid)
-                    let user = User(userName: "Кот пират", password: password, avatar: UIImage(named: "cat5")!, login: email, status: "Продвинутый")
+                    let user = User(userName: "cat_pirat".localized, password: password, avatar: UIImage(named: "cat5")!, login: email, status: "advanced".localized)
                     completionBlock(.success(user))
                 }
             }
@@ -39,7 +39,7 @@ class CheckerService: CheckerServiceProtocol{
             if error == nil{
                 if let result = authResult{
                     print("User UID:", result.user.uid)
-                    let user = User(userName: "Кот прогер", password: password, avatar: UIImage(named: "cat2")!, login: email, status: "Новичек")
+                    let user = User(userName: "cat_programmer".localized, password: password, avatar: UIImage(named: "cat2")!, login: email, status: "beginner".localized)
                     completionBlock(.success(user))
                 }
             }

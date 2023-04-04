@@ -38,7 +38,7 @@ class PhotosViewController: UIViewController{
     
     // добавляем фильтр на массив картинок и преобразуем String в UIImage
     private func createImagesArrayWithFilter(imageSource: [String])  {
-        print("Подождите минутку, идет обработка фотографий")
+        print("photo_processing".localized)
         
         for i in 0...(imageSource.count - 1)  {
             var imageWithFilter = UIImage()
@@ -51,7 +51,7 @@ class PhotosViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Photo Gallery"
+        self.navigationItem.title = "photo_gallery".localized
         self.navigationController?.navigationBar.isHidden = false
         self.setupConstraints()
         self.createImagesArrayWithFilter(imageSource: imageSource)
@@ -59,6 +59,7 @@ class PhotosViewController: UIViewController{
 
     }
     override func viewWillAppear(_ animated: Bool) {
+        
         self.imageFasade.subscribe(self)
     }
     

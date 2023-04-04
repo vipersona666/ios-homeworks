@@ -18,10 +18,10 @@ class TestUserService: UserService {
     func entryLogin(login: String, password: String) -> User? {
        
         if (user?.login != login && user?.password != password) {
-            print("Неверный логин или пароль")
+            print("login_error".localized)
             return nil
         } else{
-            print("Вход выполнен")
+            print("auto_login".localized)
             return user
         }
     }

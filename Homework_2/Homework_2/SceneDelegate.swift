@@ -37,11 +37,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         tabBarController.viewControllers = [feedViewController, profileViewController, infoViewController, selectedViewController, mapViewController]
         
-        tabBarController.viewControllers?[0].tabBarItem.title = "Главная"
-        tabBarController.viewControllers?[1].tabBarItem.title = "Профиль"
-        tabBarController.viewControllers?[2].tabBarItem.title = "Инфо"
-        tabBarController.viewControllers?[3].tabBarItem.title = "Избранное"
-        tabBarController.viewControllers?[4].tabBarItem.title = "Карта"
+        tabBarController.viewControllers?[0].tabBarItem.title = "main".localized
+        tabBarController.viewControllers?[1].tabBarItem.title = "profile".localized
+        tabBarController.viewControllers?[2].tabBarItem.title = "info".localized
+        tabBarController.viewControllers?[3].tabBarItem.title = "favorites".localized
+        tabBarController.viewControllers?[4].tabBarItem.title = "map".localized
         tabBarController.viewControllers?[0].tabBarItem.image = UIImage(systemName: "note.text")
         tabBarController.viewControllers?[1].tabBarItem.image = UIImage(systemName: "person")
         tabBarController.viewControllers?[2].tabBarItem.image = UIImage(systemName: "info")

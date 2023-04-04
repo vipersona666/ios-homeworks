@@ -24,13 +24,9 @@ class PostViewController: UIViewController {
     }
     
     @objc private func didTabItem(){
-        let infoVC = InfoViewController()
-        infoVC.modalPresentationStyle = .popover
-        self.present(infoVC, animated: true)
+      
     }
     @objc private func didTabButton(){
-        let infoVC = InfoViewController()
-        infoVC.modalPresentationStyle = .popover
-        self.present(infoVC, animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
 }
