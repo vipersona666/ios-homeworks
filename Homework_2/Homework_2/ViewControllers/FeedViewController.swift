@@ -17,7 +17,7 @@ class FeedViewController: UIViewController {
     private lazy var button: CustomButton = {
         let customButton = CustomButton(title: "go_to_post".localized,
                                         textColor: .white,
-                                        backgroundColorButton: .darkGray,
+                                        backgroundColorButton: Palette.appButtonBackgroundColor,
                                         clipsToBoundsOfButton: false,
                                         cornerRadius: 12,
                                         shadowOpacity: 0.7,
@@ -30,7 +30,7 @@ class FeedViewController: UIViewController {
     private lazy var checkGuessButton: CustomButton = {
         let customButton = CustomButton(title: "check_word".localized,
                                         textColor: .white,
-                                        backgroundColorButton: .darkGray,
+                                        backgroundColorButton: Palette.appButtonBackgroundColor,
                                         clipsToBoundsOfButton: false,
                                         cornerRadius: 12,
                                         shadowOpacity: 0.7,
@@ -43,7 +43,6 @@ class FeedViewController: UIViewController {
     private lazy var infoLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.textColor = .white
-        label.backgroundColor = .clear
         label.layer.cornerRadius = 12
         label.layer.masksToBounds = true
         label.textAlignment = .center
@@ -58,7 +57,7 @@ class FeedViewController: UIViewController {
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightText])
         textField.textColor = .white
         textField.text = ""
-        textField.backgroundColor = .darkGray
+        textField.backgroundColor = Palette.appButtonBackgroundColor
         textField.font = UIFont.systemFont(ofSize: 16.0)
         textField.layer.cornerRadius = 12
         textField.autocapitalizationType = .none

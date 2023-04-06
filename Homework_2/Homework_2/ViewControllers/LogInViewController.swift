@@ -34,7 +34,7 @@ class LogInViewController: UIViewController {
     private lazy var logInTextField: UITextField = {
         let logIn = UITextField(frame: .zero)
         logIn.placeholder = "email".localized
-        logIn.textColor = .black
+        logIn.textColor = .createColor(ligthMode: .black, darkMode: .white)
         logIn.text = ""
         logIn.keyboardType = .emailAddress
         logIn.font = UIFont.systemFont(ofSize: 16.0)
@@ -50,7 +50,7 @@ class LogInViewController: UIViewController {
     private lazy var passTextField: UITextField = {
         let pass = UITextField(frame: .zero)
         pass.placeholder = "password".localized
-        pass.textColor = .black
+        pass.textColor = .createColor(ligthMode: .black, darkMode: .white)
         pass.text = ""
         pass.font = UIFont.systemFont(ofSize: 16.0)
         pass.tintColor = UIColor(named: "AccentColor")
@@ -141,7 +141,7 @@ class LogInViewController: UIViewController {
         self.scrollView.addSubview(self.stackView)
         //self.scrollView.addSubview(self.logInButton)
         self.scrollView.addSubview(self.stackButton)
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .createColor(ligthMode: .white, darkMode: .black)
         self.stackView.addArrangedSubview(logInTextField)
         self.stackView.addArrangedSubview(passTextField)
         self.stackButton.addArrangedSubview(logInButton)

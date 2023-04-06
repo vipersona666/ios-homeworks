@@ -42,11 +42,11 @@ class PhotosViewController: UIViewController{
         
         for i in 0...(imageSource.count - 1)  {
             var imageWithFilter = UIImage()
-            imageProcessor.processImage(sourceImage: UIImage(named: imageSource[i])! , filter: .bloom(intensity: 5)) { imageWithFilter = $0 ?? UIImage(named: "1")! }
+            imageProcessor.processImage(sourceImage: UIImage(named: imageSource[i])! , filter: .chrome) { imageWithFilter = $0 ?? UIImage(named: "1")! }
             imagesArrayWithFilter.append(imageWithFilter)
             
         }
-        imageFasade.addImagesWithTimer(time: 1, repeat: 40, userImages: imagesArrayWithFilter)
+        imageFasade.addImagesWithTimer(time: 0.2, repeat: 40, userImages: imagesArrayWithFilter)
     }
     
     override func viewDidLoad() {
@@ -76,7 +76,7 @@ class PhotosViewController: UIViewController{
     private func setupConstraints(){
         self.view.addSubview(collectionView)
         self.view.backgroundColor = .white
-        
+        self.view.backgroundColor = .createColor(ligthMode: .white, darkMode: .black)
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             self.collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

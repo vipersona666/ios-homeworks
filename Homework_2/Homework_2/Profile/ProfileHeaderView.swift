@@ -17,27 +17,16 @@ class ProfileHeaderView: UITableViewHeaderFooterView{
         imageView.image = UIImage(named: imageName)
         imageView.layer.cornerRadius = 55
         imageView.layer.borderWidth = 3.0
-        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.borderColor = UIColor.createColor(ligthMode: .white, darkMode: .lightGray).cgColor
         imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private lazy var editButton: CustomButton = {
-//        let button = UIButton(frame: .zero)
-//        button.backgroundColor = .blue
-//        button.tintColor = .white
-//        button.setTitle("Show status", for: .normal)
-//        button.layer.cornerRadius = 12
-//        //button.layer.shadowColor = UIColor.black.cgColor
-//        button.layer.shadowOpacity = 0.7
-//        button.layer.shadowOffset = CGSize(width: 6, height: 6)
-//        button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        return button
         let customButton = CustomButton(title: "show_status".localized,
                                         textColor: .white,
-                                        backgroundColorButton: .blue,
+                                        backgroundColorButton: Palette.appButtonBackgroundColor,
                                         clipsToBoundsOfButton: false,
                                         cornerRadius: 12,
                                         shadowOpacity: 0.7,
@@ -50,7 +39,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView{
     private lazy var nameLabel: UILabel = {
         let name = UILabel(frame: .zero)
         name.text = "Something Cat"
-        name.textColor = .black
+        name.textColor = .createColor(ligthMode: .black, darkMode: .white)
         name.font = UIFont.boldSystemFont(ofSize: 18.0)
         name.translatesAutoresizingMaskIntoConstraints = false
         return name
@@ -59,7 +48,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView{
     private lazy var infoLabel: UILabel = {
         let info = UILabel(frame: .zero)
         info.text = "Waiting for something..."
-        info.textColor = .darkGray
+        info.textColor = .createColor(ligthMode: .black, darkMode: .white)
         info.font = UIFont.systemFont(ofSize: 14.0)
         info.translatesAutoresizingMaskIntoConstraints = false
         return info
@@ -67,14 +56,14 @@ class ProfileHeaderView: UITableViewHeaderFooterView{
     
     private lazy var textField: UITextField = {
         let text = UITextField(frame: .zero)
-        text.backgroundColor = .white
+        text.backgroundColor = .createColor(ligthMode: .white, darkMode: .gray)
         text.font = UIFont.systemFont(ofSize: 15)
-        text.textColor = .black
+        text.textColor = .createColor(ligthMode: .black, darkMode: .white)
         text.placeholder = "status".localized
         text.textAlignment = .center
         text.layer.cornerRadius = 12
         text.layer.borderWidth = 1
-        text.layer.borderColor = UIColor.black.cgColor
+        text.layer.borderColor = UIColor.createColor(ligthMode: .black, darkMode: .white).cgColor
         text.becomeFirstResponder()
         text.addTarget(self, action: #selector(self.statusTextChanged(_:)), for: .editingChanged)
         text.translatesAutoresizingMaskIntoConstraints = false

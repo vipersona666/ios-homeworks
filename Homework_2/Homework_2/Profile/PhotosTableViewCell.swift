@@ -12,7 +12,7 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var photoLabel: UILabel = {
         let photoLabel = UILabel(frame: .zero)
         photoLabel.text = "albom".localized
-        photoLabel.textColor = .black
+        photoLabel.textColor = .createColor(ligthMode: .black, darkMode: .white)
         photoLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
         photoLabel.translatesAutoresizingMaskIntoConstraints = false
         return photoLabel
@@ -22,7 +22,7 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var editButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(systemName: "arrow.right"), for: UIControl.State.normal)
-        button.tintColor = .black
+        button.tintColor = .createColor(ligthMode: .black, darkMode: .white)
         button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -33,7 +33,7 @@ class PhotosTableViewCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 8
-        stackView.backgroundColor = .white
+        stackView.backgroundColor = .systemBackground
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -41,7 +41,7 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var oneImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .green
+        imageView.backgroundColor = .createColor(ligthMode: .black, darkMode: .white)
         imageView.image = UIImage(named: "1")
         imageView.layer.cornerRadius = 6
         imageView.clipsToBounds = true
@@ -52,7 +52,7 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var twoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .white
+        imageView.backgroundColor = .createColor(ligthMode: .black, darkMode: .white)
         imageView.layer.cornerRadius = 6
         imageView.image = UIImage(named: "2")
         imageView.clipsToBounds = true
@@ -63,7 +63,7 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var threeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .white
+        imageView.backgroundColor = .createColor(ligthMode: .black, darkMode: .white)
         imageView.layer.cornerRadius = 6
         imageView.image = UIImage(named: "3")
         imageView.clipsToBounds = true
@@ -74,7 +74,7 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var fourImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .white
+        imageView.backgroundColor = .createColor(ligthMode: .black, darkMode: .white)
         imageView.layer.cornerRadius = 6
         imageView.image = UIImage(named: "4")
         imageView.clipsToBounds = true

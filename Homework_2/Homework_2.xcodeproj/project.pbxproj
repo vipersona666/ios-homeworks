@@ -35,6 +35,7 @@
 		B35D6A472993AEEF00F437C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B35D6A462993AEEF00F437C7 /* GoogleService-Info.plist */; };
 		B35D6A482993AEEF00F437C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B35D6A462993AEEF00F437C7 /* GoogleService-Info.plist */; };
 		B3755A5F29112F2F00634FA2 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3755A5E29112F2F00634FA2 /* CustomButton.swift */; };
+		B37ECC3A29DDD30200C52F9D /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37ECC3929DDD30200C52F9D /* Palette.swift */; };
 		B394A1DD29A3CC3D00A5CF3A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B394A1DC29A3CC3D00A5CF3A /* RealmSwift */; };
 		B394A1DF29A3D56900A5CF3A /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394A1DE29A3D56900A5CF3A /* AuthModel.swift */; };
 		B3B5008129A6AEED00B930D8 /* SelectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5008029A6AEED00B930D8 /* SelectedViewController.swift */; };
@@ -107,6 +108,7 @@
 		B35D6A20298D1C5D00F437C7 /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
 		B35D6A462993AEEF00F437C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B3755A5E29112F2F00634FA2 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		B37ECC3929DDD30200C52F9D /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		B394A1DE29A3D56900A5CF3A /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		B3B5008029A6AEED00B930D8 /* SelectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedViewController.swift; sourceTree = "<group>"; };
 		B3B6CB0529DB23FC003AD82A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -156,8 +158,8 @@
 				B3451FCE289A83080092DB6E /* FeedViewController.swift */,
 				B3B5008029A6AEED00B930D8 /* SelectedViewController.swift */,
 				B3451FD0289A83210092DB6E /* InfoViewController.swift */,
-				B3451FD4289A83520092DB6E /* PostViewController.swift */,
 				B307C91829CDAA0500002D32 /* MapViewController.swift */,
+				B3451FD4289A83520092DB6E /* PostViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -237,6 +239,7 @@
 				B353EE82290046FA00277849 /* LoginInspector.swift */,
 				B353EE7428FDE4D800277849 /* TestUserService.swift */,
 				B353EE4528F4278D00277849 /* CurrentUserService.swift */,
+				B37ECC3929DDD30200C52F9D /* Palette.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				B305AB42297EC05C001ECC72 /* NetworkManager.swift in Sources */,
 				B3451FCF289A83080092DB6E /* FeedViewController.swift in Sources */,
 				B3B7374228CF8CAA00BBCA25 /* PostViewController.swift in Sources */,
+				B37ECC3A29DDD30200C52F9D /* Palette.swift in Sources */,
 				B353EE81290046CB00277849 /* LoginFactory.swift in Sources */,
 				B307C91229C865DB00002D32 /* Post.xcdatamodeld in Sources */,
 				B3755A5F29112F2F00634FA2 /* CustomButton.swift in Sources */,

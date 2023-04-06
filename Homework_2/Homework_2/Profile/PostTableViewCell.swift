@@ -27,7 +27,7 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var authorLabel: UILabel = {
         let name = UILabel()
-        name.textColor = .black
+        name.textColor = .createColor(ligthMode: .black, darkMode: .white)
         name.font = UIFont.boldSystemFont(ofSize: 20.0)
         name.numberOfLines = 2
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -37,14 +37,14 @@ class PostTableViewCell: UITableViewCell {
     private lazy var postImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .black
+        imageView.backgroundColor = .createColor(ligthMode: .black, darkMode: .black)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private lazy var descriptionLabel: UILabel = {
         let description = UILabel()
-        description.textColor = .systemGray
+        description.textColor = .createColor(ligthMode: .black, darkMode: .white)
         description.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         description.numberOfLines = 0
         description.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +53,7 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var likesLabel: UILabel = {
         let likesLabel = UILabel()
-        likesLabel.textColor = .black
+        likesLabel.textColor = .createColor(ligthMode: .black, darkMode: .white)
         likesLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         likesLabel.translatesAutoresizingMaskIntoConstraints = false
         return likesLabel
@@ -61,7 +61,7 @@ class PostTableViewCell: UITableViewCell {
     
     private lazy var viewsLabel: UILabel = {
         let viewsLabel = UILabel()
-        viewsLabel.textColor = .black
+        viewsLabel.textColor = .createColor(ligthMode: .black, darkMode: .white)
         viewsLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         viewsLabel.translatesAutoresizingMaskIntoConstraints = false
         return viewsLabel

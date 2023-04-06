@@ -32,8 +32,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBarController = UITabBarController()
         tabBarController.tabBar.backgroundColor = .clear
-        tabBarController.tabBar.tintColor = UIColor.black
-        tabBarController.tabBar.unselectedItemTintColor = .gray
+        tabBarController.tabBar.tintColor = .createColor(ligthMode: .black, darkMode: .white)
+        tabBarController.tabBar.unselectedItemTintColor = .lightGray
         
         tabBarController.viewControllers = [feedViewController, profileViewController, infoViewController, selectedViewController, mapViewController]
         

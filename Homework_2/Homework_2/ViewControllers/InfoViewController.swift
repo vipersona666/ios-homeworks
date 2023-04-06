@@ -12,7 +12,7 @@ class InfoViewController: UIViewController {
     private lazy var buttonInfo: CustomButton = {
         let customButton = CustomButton(title: "response_server".localized,
                                         textColor: .white,
-                                        backgroundColorButton: .darkGray,
+                                        backgroundColorButton: Palette.appButtonBackgroundColor,
                                         clipsToBoundsOfButton: false,
                                         cornerRadius: 12, shadowOpacity: 0.7,
                                         shadowOffset: CGSize(width: 0.5, height: 0.5),
@@ -24,7 +24,7 @@ class InfoViewController: UIViewController {
     private lazy var labelInfo: UILabel = {
         let label = UILabel(frame: .zero)
         label.textColor = .white
-        label.backgroundColor = .darkGray
+        label.backgroundColor = Palette.appButtonBackgroundColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -32,7 +32,7 @@ class InfoViewController: UIViewController {
     private lazy var labelOrbitalPlanet: UILabel = {
         let label = UILabel(frame: .zero)
         label.textColor = .white
-        label.backgroundColor = .darkGray
+        label.backgroundColor = Palette.appButtonBackgroundColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
