@@ -51,6 +51,7 @@
 		B3B7375828D0B7B900BBCA25 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7375628D0B71900BBCA25 /* Post.swift */; };
 		B3C48AB0289D2EB2001934EB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C48AAF289D2EB2001934EB /* ProfileViewController.swift */; };
 		B3C48AB228A138B3001934EB /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C48AB128A138B3001934EB /* ProfileHeaderView.swift */; };
+		B3E646F429E568A700A1EEA7 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E646F329E568A700A1EEA7 /* LocalAuthorizationService.swift */; };
 		B3FCE95F294778F30038CD2D /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCE95E294778F30038CD2D /* FeedModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +124,7 @@
 		B3B7375628D0B71900BBCA25 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		B3C48AAF289D2EB2001934EB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B3C48AB128A138B3001934EB /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; tabWidth = 4; };
+		B3E646F329E568A700A1EEA7 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		B3FCE95E294778F30038CD2D /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -240,6 +242,7 @@
 				B353EE7428FDE4D800277849 /* TestUserService.swift */,
 				B353EE4528F4278D00277849 /* CurrentUserService.swift */,
 				B37ECC3929DDD30200C52F9D /* Palette.swift */,
+				B3E646F329E568A700A1EEA7 /* LocalAuthorizationService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3E646F429E568A700A1EEA7 /* LocalAuthorizationService.swift in Sources */,
 				B353EE83290046FA00277849 /* LoginInspector.swift in Sources */,
 				B353EE4628F4278D00277849 /* CurrentUserService.swift in Sources */,
 				B353EE7F2900466600277849 /* Cheker.swift in Sources */,

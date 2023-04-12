@@ -80,7 +80,7 @@ class FeedViewController: UIViewController {
         setupGesture()
     }
     override func viewDidAppear(_ animated: Bool) {
-        self.checkTextField.becomeFirstResponder()
+        //self.checkTextField.becomeFirstResponder()
     }
     
     

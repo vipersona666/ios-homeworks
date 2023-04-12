@@ -47,3 +47,11 @@
 "status" = "Set the status";
 "show_status" = "Show status";
 "albom" = "Photos";
+"biometrical" = "Use Face ID";
+"empty_field" = "Fields must not be empty";
+"enter_password_to_log" = "Enter your password to log into your account";
+"error_biometrical" = "Error. Unable to use biometrics";
+"excellent" = "Excellent";
+"authentication" = "Authentication passed";
+"ok" = "Ok";
+"error" = "Error";

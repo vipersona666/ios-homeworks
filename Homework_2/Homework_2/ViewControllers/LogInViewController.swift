@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import LocalAuthentication
 
 class LogInViewController: UIViewController {
     
@@ -14,6 +15,10 @@ class LogInViewController: UIViewController {
     
     var authModel = AuthUser()
     let realm = try! Realm()
+    
+    let context = LAContext()
+    var error: NSError?
+    var isBiometria: Bool = false
     
     let queue = DispatchQueue(label: "hackPassQueue", qos: .userInteractive)
     
@@ -40,7 +45,7 @@ class LogInViewController: UIViewController {
         logIn.font = UIFont.systemFont(ofSize: 16.0)
         logIn.tintColor = UIColor(named: "AccentColor")
         logIn.autocapitalizationType = .none
-        logIn.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: logIn.frame.height))
+        logIn.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         logIn.leftViewMode = .always
         logIn.clipsToBounds = true
         logIn.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +60,7 @@ class LogInViewController: UIViewController {
         pass.font = UIFont.systemFont(ofSize: 16.0)
         pass.tintColor = UIColor(named: "AccentColor")
         pass.autocapitalizationType = .none
-        pass.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: pass.frame.height))
+        pass.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         pass.leftViewMode = .always
         pass.isSecureTextEntry = true
         pass.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +89,7 @@ class LogInViewController: UIViewController {
                                         shadowOpacity: 0,
                                         shadowOffset: .zero,
                                         translatesAutoresizingMask: false)
-        customButton.addTarget = {self.buttonPressed()}
+        customButton.addTarget = {self.logInbuttonPressed()}
         return customButton
     }()
     
@@ -114,6 +119,20 @@ class LogInViewController: UIViewController {
         return customButton
     }()
     
+    private lazy var biometricalAuthButton: CustomButton = {
+        let button = CustomButton(title: "biometrical".localized,
+                                  textColor: .white,
+                                  backgroundColorButton: UIColor(named: "AccentColor")!,
+                                  clipsToBoundsOfButton: true,
+                                  cornerRadius: 10,
+                                  shadowOpacity: 0,
+                                  shadowOffset: .zero,
+                                  translatesAutoresizingMask: false)
+        button.isHidden = isBiometria
+        button.addTarget = {self.biometricalButtonPressed()}
+           return button
+       }()
+    
     private lazy var stackButton: UIStackView = {
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .vertical
@@ -135,31 +154,35 @@ class LogInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.navigationItem.title = "Профиль"
+        self.view.backgroundColor = .createColor(ligthMode: .white, darkMode: .black)
         self.view.addSubview(self.scrollView)
+        self.view.addSubview(activityIndicator)
         self.scrollView.addSubview(self.logInImageView)
         self.scrollView.addSubview(self.stackView)
-        //self.scrollView.addSubview(self.logInButton)
+        self.scrollView.addSubview(self.biometricalAuthButton)
         self.scrollView.addSubview(self.stackButton)
-        self.view.backgroundColor = .createColor(ligthMode: .white, darkMode: .black)
         self.stackView.addArrangedSubview(logInTextField)
         self.stackView.addArrangedSubview(passTextField)
         self.stackButton.addArrangedSubview(logInButton)
         self.stackButton.addArrangedSubview(signUpButton)
-        self.view.addSubview(activityIndicator)
+        self.navigationController?.navigationBar.isHidden = true
         self.setupView()
         self.setupGesture()
-        self.navigationController?.navigationBar.isHidden = true
-        self.checkAuthUser()
+        
     }
     override func viewDidAppear(_ animated: Bool) {
-        self.logInTextField.becomeFirstResponder()
+        //self.logInTextField.becomeFirstResponder()
+        self.checkBiometrical()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.didShowKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.didHideKeyboard(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didShowKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didHideKeyboard(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error){
+            isBiometria = true
+        }
+       
     }
     
     
@@ -187,6 +210,12 @@ class LogInViewController: UIViewController {
             self.stackButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.stackButton.heightAnchor.constraint(equalToConstant: 108),
             
+            self.biometricalAuthButton.bottomAnchor.constraint(equalTo: self.stackButton.bottomAnchor, constant: 120),
+            self.biometricalAuthButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+            self.biometricalAuthButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
+            self.biometricalAuthButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.biometricalAuthButton.heightAnchor.constraint(equalToConstant: 40),
+            
             self.activityIndicator.leadingAnchor.constraint(equalTo: stackButton.leadingAnchor, constant: 26),
             self.activityIndicator.centerYAnchor.constraint(equalTo: stackView.centerYAnchor, constant: 26)
       
@@ -206,18 +235,18 @@ class LogInViewController: UIViewController {
         let user = UserDefaults.standard.string(forKey: "authKey")
         if lastAuthUser != nil && lastAuthUser?.login == user {
             let checkerService = CheckerService()
-            checkerService.checkCredentials(email: lastAuthUser!.login, password: lastAuthUser!.password) { result in
+            checkerService.checkCredentials(email: lastAuthUser!.login, password: lastAuthUser!.password) {[weak self] result in
                 switch result {
                 case .success(let user):
                     let vc = ProfileViewController(user: user)
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    self?.navigationController?.pushViewController(vc, animated: true)
                     print("auto_login".localized)
                 case .failure(_):
                     print("login_error".localized)
                     let alarm = UIAlertController(title: "login_error".localized, message: "enter_login_and_password".localized, preferredStyle: .alert)
                     let alarmAction = UIAlertAction(title: "close".localized, style: .default)
                                             alarm.addAction(alarmAction)
-                                            self.present(alarm, animated: true)
+                                            self?.present(alarm, animated: true)
                 }
             }
         }
@@ -227,7 +256,7 @@ class LogInViewController: UIViewController {
        
     }
     
-    @objc private func buttonPressed(){
+    @objc private func logInbuttonPressed(){
         
         if (!logInTextField.text!.isEmpty && !passTextField.text!.isEmpty) {
             let checkerService = CheckerService()
@@ -247,6 +276,11 @@ class LogInViewController: UIViewController {
                                             self.present(alarm, animated: true)
                 }
             }
+        } else {
+            let alarm = UIAlertController(title: "empty_field".localized, message: "", preferredStyle: .alert)
+            let alarmAction = UIAlertAction(title: "close".localized, style: .default)
+                                    alarm.addAction(alarmAction)
+                                    self.present(alarm, animated: true)
         }
     }
     
@@ -271,7 +305,51 @@ class LogInViewController: UIViewController {
                 }
                 
             }
+        } else {
+            let alarm = UIAlertController(title: "empty_field".localized, message: "", preferredStyle: .alert)
+            let alarmAction = UIAlertAction(title: "close".localized, style: .default)
+                                    alarm.addAction(alarmAction)
+                                    self.present(alarm, animated: true)
         }
+    }
+    
+    private func checkBiometrical(){
+        if isBiometria {
+            context.evaluatePolicy(.deviceOwnerAuthentication,
+                                   localizedReason: "enter_password_to_log".localized) { [weak self] success, error in
+                DispatchQueue.main.async {
+                    if let error = error { print(error.localizedDescription) }
+                    if success {
+                        self?.displaySuccessAlert()
+                        self?.checkAuthUser()
+                    } else {
+                        self?.displayErrorAlert(error?.localizedDescription ?? "Ошибка")
+                    }
+                }
+            }
+        } else {
+            print(error?.localizedDescription ?? "")
+            print("error_biometrical".localized)
+        }
+        
+    }
+    
+    
+    @objc private func biometricalButtonPressed(){
+            checkBiometrical()
+    }
+    private func displaySuccessAlert(){
+        let alert = UIAlertController(title: "excellent".localized, message: "authentication".localized, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "ok".localized, style: .default)
+        alert.addAction(alertAction)
+        present(alert, animated: true)
+    }
+    
+    private func displayErrorAlert(_ error: String){
+        let alert = UIAlertController(title: "error".localized, message: error, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "ok".localized, style: .default)
+        alert.addAction(alertAction)
+        present(alert, animated: true)
     }
 
 //            let debugUser = User(userName: "Кот пират", password: passTextField.text!, avatar: UIImage(named: "cat5")!, login: logInTextField.text!, status: "Продвинутый")
@@ -378,10 +456,14 @@ class LogInViewController: UIViewController {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRect = keyboardFrame.cgRectValue
             let keyboardHight = keyboardRect.height
-            let loginButtonBottomPointY = self.logInButton.frame.origin.y + 50
+            let loginButtonBottomPointY = logInButton.frame.origin.y + stackButton.frame.origin.y + logInButton.frame.height
             let keyboardOriginY = self.view.frame.height - keyboardHight
-            let offset = keyboardOriginY <= loginButtonBottomPointY ? loginButtonBottomPointY - keyboardOriginY + 25 : 0
-
+            var offset: CGFloat = CGFloat()
+            
+            if keyboardOriginY <= loginButtonBottomPointY {
+                offset =  loginButtonBottomPointY - keyboardOriginY + 16
+               
+            }
             self.scrollView.contentOffset = CGPoint(x: 0, y: offset)
         }
     }
