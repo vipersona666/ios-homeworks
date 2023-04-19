@@ -168,11 +168,12 @@ class LogInViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.setupView()
         self.setupGesture()
-        
+        self.checkAuthUser()
     }
     override func viewDidAppear(_ animated: Bool) {
         //self.logInTextField.becomeFirstResponder()
-        self.checkBiometrical()
+        //
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -234,10 +235,13 @@ class LogInViewController: UIViewController {
         let lastAuthUser = realm.objects(AuthUser.self).last
         let user = UserDefaults.standard.string(forKey: "authKey")
         if lastAuthUser != nil && lastAuthUser?.login == user {
+            //let isBioAuth = false
+            
             let checkerService = CheckerService()
             checkerService.checkCredentials(email: lastAuthUser!.login, password: lastAuthUser!.password) {[weak self] result in
                 switch result {
                 case .success(let user):
+                    
                     let vc = ProfileViewController(user: user)
                     self?.navigationController?.pushViewController(vc, animated: true)
                     print("auto_login".localized)
@@ -245,13 +249,14 @@ class LogInViewController: UIViewController {
                     print("login_error".localized)
                     let alarm = UIAlertController(title: "login_error".localized, message: "enter_login_and_password".localized, preferredStyle: .alert)
                     let alarmAction = UIAlertAction(title: "close".localized, style: .default)
-                                            alarm.addAction(alarmAction)
-                                            self?.present(alarm, animated: true)
+                    alarm.addAction(alarmAction)
+                    self?.present(alarm, animated: true)
                 }
             }
         }
         else {
             print("sign_in_or_sign_up".localized)
+            
         }
        
     }
@@ -313,7 +318,7 @@ class LogInViewController: UIViewController {
         }
     }
     
-    private func checkBiometrical(){
+    private func checkBiometrical() -> Bool {
         if isBiometria {
             context.evaluatePolicy(.deviceOwnerAuthentication,
                                    localizedReason: "enter_password_to_log".localized) { [weak self] success, error in
@@ -327,9 +332,11 @@ class LogInViewController: UIViewController {
                     }
                 }
             }
+            return true
         } else {
             print(error?.localizedDescription ?? "")
             print("error_biometrical".localized)
+            return false
         }
         
     }

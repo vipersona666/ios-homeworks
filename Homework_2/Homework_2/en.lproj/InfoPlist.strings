@@ -7,3 +7,4 @@
 */
 NSLocationWhenInUseUsageDescription = "To work with maps, allow us to use your location";
 NSFaceIDUsageDescription = "Allow to use Face ID";
+//NSAppleEventsUsageDescription = "Allow the application to receive notifications";

@@ -7,3 +7,4 @@
 */
 NSLocationWhenInUseUsageDescription = "Для работы с картами, разрешите использовать ваше местоположение";
 NSFaceIDUsageDescription = "Разрешите использование Face ID";
+//NSAppleEventsUsageDescription = "Разрешите приложению получать нотификации";
